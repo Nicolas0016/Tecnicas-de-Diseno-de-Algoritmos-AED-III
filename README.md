@@ -1,1 +1,1 @@
-# Tecnicas-de-Diseno-de-Algoritmos-AED-III-
+# Técnicas de Diseño de Algoritmos 2026
