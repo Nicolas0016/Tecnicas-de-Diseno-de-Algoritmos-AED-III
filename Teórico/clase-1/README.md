@@ -66,3 +66,47 @@ Llegamos a esta expresión:
 $T(n) ≤ bn \sum_{i=0}^{\log_c​n}{(a/c)^i}$
 
 Estamos sumando, nivel por nivel (desde i = 0, hasta $i=\log_c n$ abajo), el costo de cada nivel. En el nivel $a^i$ subproblemas, cada uno de tamaño $(n/c)^i$ y el costo de procesar cada uno (sin contar la recursión más profunda) es $b \cdot (\text{tamaño})^d = b \cdot (n/c^i)^d$. Si $d=1$, es $b \cdot n/c^i$.
+
+
+$g(n) \text{ nos queda como }\sum_{i=0}^{\log_c​n}{(a/c)^i}$
+
++ $a < c$
+    + tengo pocos subproblemas ($a$) en relacion a lo mucho que se achican ($c$). En este caso cada nivel genera menos trabajo que el anterior porque $(a/c) < 1$.
+    + $\sum_{i=0}^{\infty} (a/c)^i$ converge a una constante;
+    + $T(n) = O(n)$. El trabajo pesado se hace en primer nivel. Los niveles recursivos aportan tan poco que no cambian el orden.
+
++ $a = c$
+    + El número de subproblemas $a$ es exactamente el factor de división $c$. Esto significa que cada nivel tiene la misma cantidad total de trabajo que el anterior.
+    + $\sum_{i=0}^{\log_c n} 1 = \log_c n + 1$.
+    + $T(n) = O(n \log n)$. Todos los niveles del árbol de recursión cuestan lo mismo. Como hay $\log_c n$ niveles, el costo totales $n \cdot \log n$ 
+    > Caso del Merge Sort.
+
++ $a > c$ (EXPLOSIÓN):
+    + Tengo muchos subproblemas ($a$) y no se achican lo suficiente ($c$). Cada nivel genera más trabajo que el anterior porque $(a/c) > 1$.
+    + $T(n) = O(n^{\log_c a})$ XD
+    + Casi todo el trabajo del algoritmo se hace en las hojas del árbol de recursión (los caso base). El exponente $\log_c a$ es la "dimensión fractal" del algoritmo.
+
+
+### Teorema Maestro
++ Si  $f(n) = O(n^{\log_c a - \epsilon})$ para algún $\epsilon > 0$ ($f(n)$ crece más lento que $n^{\log_c a}$).
+    + La mayor parte del tiempo del algoritmo se consume en los niveles más profundos de la recursión (el caso base). El costo de dividir y juntar es insignificante comparado con la resolución de los problemas.
+
+    + $T(n) = \Theta(n^{\log_c a})$
+
+> Ejemplo de Wikipedia
+>
+> $T(n) = 8 T(n/2) + 1000n²$
+>
+> Como se puede ver en la formula de arriba:
+>
+> $a = 8$, $b = 2$, $f(n) = 1000n²$, entonces
+>
+> $f(n) = O(n^c)$, donde $c = 2$.
+>
+> Luego vemos si se cumple la condición:
+>
+>$\log_{b}{a} = \log_{2}{8} = 3 > c$.
+>
+> Luego por el teorema maestro tenemos que:
+>
+> T(n) = $\theta(n^{\log_b a}) = \theta(n^3)$ 
