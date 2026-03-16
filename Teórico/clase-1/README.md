@@ -141,3 +141,36 @@ $g(n) \text{ nos queda como }\sum_{i=0}^{\log_c​n}{(a/c)^i}$
 > 
 > $T(n) = \theta(n^{log_b{a}} \cdot log^{k+1} \cdot n ) = \theta(n¹ \cdot \log² \cdot n) = \theta(n \log n)$
 > Dando de esa manera que la relación de recurrencia de $T(n)$ es $Θ(n \log n)$. 
+
++ Si $f(n) = \Omega(n^{\log_c a + \epsilon})$ Y se cumple la "condición de regularidad": $a \cdot f(n/c) \leq k \cdot f(n)$ para algún $k < 1$ y $n$ grande.
+    + $f(n)$ crece más rápido que el costo de las hojas. Y además, el costo no se descontrola de manera extraña.
+    + La mayor parte del tiempo se va en función de $f(n)$, es decir, en dividir el problema y combinar las soluciones, los subproblemas son casi "gratis" en comparación.
+    + $T(n) = \Theta(f(n))$.
+
+> Si $f(n) = \Omega(n^c)$ donde $c > log_b a$ 
+> Y además que: $a f(n/b)\le kf(n)$ para alguna constante k < 1 y suficientemente grande n
+>Entonces:
+>$T(n) = \Theta(f(n))$
+>
+> Ejemplo:
+> $T(n) = 2T(n/2) + n²$
+>
+> Como puede verse en la fórmula de arriba, las variables obtienen los siguientes valores: 
+> 
+> $a = 2, b = 2, f(n) = n²$
+> 
+> $f(n) = \Omega(n^c)$, donde $c = 2$
+>
+>Luego se comprueba que satisface la condición del caso 3: 
+>
+>$\log_b a = \log_2 2 = 1$, por lo tanto cumple que $c > \log_b a$
+>
+>La condición también se cumple:
+>
+>$2 (n²/4)\le kn²$, eligiendo $k = 1/2$
+>
+>Entonces por el tercer caso del teorema maestro:
+>
+> $T(n) = \Theta(f(n)) = \Theta(n²)$
+>
+> Por consiguiente la relación de recurrencia $T(n)$ es $\Theta(n²)$
