@@ -25,10 +25,18 @@ Lo primero que hacemos al analizar un algoritmo D&C es escribir su ecuación de 
 ![alt text](image.png)
 
 Donde:
-+ **T(n)**: Es el tiempo que tarda el problema en resolver un problema de tamaño n.
-+ **a**: Es el numero de subproblemas en los que dividimos al problema original.
++ **$T(n)$**: Es el tiempo que tarda el problema en resolver un problema de tamaño $n$.
++ **$a$**: Es el numero de subproblemas en los que dividimos al problema original.
     + Ejemplo (Busqueda Binaria): Busco en uno de las dos mitades.
     + Ejemplo (Merge Sort): Tengo que ordenar ambas mitades
-+ **n/c**: Es el tamaño de cada subproblema.
-    + Ejemplo: en el Merge Sort, cada mitad tiene tamaño n/2. c = 2.
-+ **f(n)**: Es el costo de dividir el problema en subproblemas más el costo de combinar las soluciones de esos problemas para obtener la función final. Es un trabajo **No recursivo** que hacemos en cada nivel.
++ **$n/c$**: Es el tamaño de cada subproblema.
+    + Ejemplo: en el Merge Sort, cada mitad tiene tamaño $n/2$. $c = 2$.
++ **$f(n)$**: Es el costo de dividir el problema en subproblemas más el costo de combinar las soluciones de esos problemas para obtener la función final. Es un trabajo **No recursivo** que hacemos en cada nivel.
+
+### La función $g(n)$:
+La teórica introduce una función auxiliar llamada $g(n)$. Porque hay veces donde no sabemos el valor exacto de $T(1)$ o las constantes, asi que definimos una cota superior $g(n)$ que sabemos que no es mayor o igual que $T(n)$ para simplificar cuentas.
+
+![alt text](image-1.png) 
+![alt text](image-2.png)
+
+**$d$**: es el **Orden del polinomio** que acota el costo de dividir y combinar $f(n)$
