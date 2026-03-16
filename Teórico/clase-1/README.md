@@ -110,3 +110,34 @@ $g(n) \text{ nos queda como }\sum_{i=0}^{\log_c​n}{(a/c)^i}$
 > Luego por el teorema maestro tenemos que:
 >
 > T(n) = $\theta(n^{\log_b a}) = \theta(n^3)$ 
+
+
++ Si $f(n) = \Theta(n^{\log_c a})$, $f(n)$ crece exactamente igual que el costo de las hojas (cada nivel del árbol de recursión cuesta lo mismo).
+    +  Resutaldo: $T(n) = \Theta(n^{\log_c a} \cdot \log n)$
+
+> Ejemplo de Wikipedia
+> 
+> Si $f(n) = \theta(n ^ {\log_b a})$
+>
+> Entonces: 
+>
+> $T(n) = \theta(n ^ {\log_b a} \cdot \log n)$
+>
+> Ejemplo: 
+>
+> $T(n) = 2T(n/2) + 10n$
+>
+> Las variables tienen los siguientes valores:
+>
+> $a = 2 ; b = 2 ; c = 1$
+> $f(n) = 10n$
+> $f(n) = \theta(n^c \log^k(n))$ donde $c = 1$, $k = 0$
+>
+> Vemos si cumple la condicion 2:
+>
+> $\log_b{a} = log_{2}{2} = 1$, se cumple que $c = log_b a$
+>
+> Entonces por el segundo caso del teorema maestro:
+> 
+> $T(n) = \theta(n^{log_b{a}} \cdot log^{k+1} \cdot n ) = \theta(n¹ \cdot \log² \cdot n) = \theta(n \log n)$
+> Dando de esa manera que la relación de recurrencia de $T(n)$ es $Θ(n \log n)$. 
