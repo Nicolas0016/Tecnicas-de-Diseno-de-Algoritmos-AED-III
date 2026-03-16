@@ -36,7 +36,8 @@ Donde:
 ### La función $g(n)$:
 La teórica introduce una función auxiliar llamada $g(n)$. Porque hay veces donde no sabemos el valor exacto de $T(1)$ o las constantes, asi que definimos una cota superior $g(n)$ que sabemos que no es mayor o igual que $T(n)$ para simplificar cuentas.
 
-![alt text](image-1.png) 
-![alt text](image-2.png)
+$g(1) = b$ (el costo base)
 
-**$d$**: es el **Orden del polinomio** que acota el costo de dividir y combinar $f(n)$
+$g(n) = a g(n/c) + bn^d$ para $n > 1$
+
+**$d$**: es el **Orden del polinomio** que acota el costo de dividir y combinar $f(n)$. Es decir $f(n) = O(n^d)$
