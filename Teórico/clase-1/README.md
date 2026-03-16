@@ -6,15 +6,29 @@ Imaginemos que tenemos un progblema muy grande. Lo que busca el D&C es:
 3. Juntas las soluciones de los pedazos para formar la solucion del problema más grande.
 
 > Ejemplo (Merge Sort).
->+ ***Problema***: Ordenar una lista de 1000 números desordenados.
->+ ***Dividir***: Parto la lista en dos mitades
->+ ***Resolver***: Ordeno cada mitad (aplicando el mismo método)
->+ ***Combinar***: Mezclo las dos mitades ya ordenadas para obtener la lista de  1000 elementos ordenada
+>+ **Problema**: Ordenar una lista de 1000 números desordenados.
+>+ **Dividir**: Parto la lista en dos mitades
+>+ **Resolver**: Ordeno cada mitad (aplicando el mismo método)
+>+ **Combinar**: Mezclo las dos mitades ya ordenadas para obtener la lista de  1000 elementos ordenada
 
-> OBS: Lo importante es "Las subpartes tienen que ser más pequeñas Y ser el mismo tipo de tarea". Si divido el problema de ordenar una lista pero más chica, funciona. Pero si lo divido en "sumar números" es otro tipo de tarea completamente diferente, ya no es D&C.
+> **OBS**: Lo importante es "Las subpartes tienen que ser más pequeñas Y ser el mismo tipo de tarea". Si divido el problema de ordenar una lista pero más chica, funciona. Pero si lo divido en "sumar números" es otro tipo de tarea completamente diferente, ya no es D&C.
 
 ### Forma General del D&C:
 ![](../../img/image%20copy.png)
 + Caso base: "Si X es suficientemente chico"
 + Paso recursivo: Divido, resuelvo recursivamente, y finalmente combino.
 XD
+
+### ¿Cuánto tarda? (Matemática) :(
+Lo primero que hacemos al analizar un algoritmo D&C es escribir su ecuación de recurrencia. La forma estándar que usamos es:
+
+![alt text](image.png)
+
+Donde:
++ **T(n)**: Es el tiempo que tarda el problema en resolver un problema de tamaño n.
++ **a**: Es el numero de subproblemas en los que dividimos al problema original.
+    + Ejemplo (Busqueda Binaria): Busco en uno de las dos mitades.
+    + Ejemplo (Merge Sort): Tengo que ordenar ambas mitades
++ **n/c**: Es el tamaño de cada subproblema.
+    + Ejemplo: en el Merge Sort, cada mitad tiene tamaño n/2. c = 2.
++ **f(n)**: Es el costo de dividir el problema en subproblemas más el costo de combinar las soluciones de esos problemas para obtener la función final. Es un trabajo **No recursivo** que hacemos en cada nivel.
