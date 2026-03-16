@@ -46,14 +46,23 @@ $g(n) = a g(n/c) + bn^d$ para $n > 1$
 + Si cuesta lineal, entonces $d = 1$.
 + Si cuesta cudrático, entonces $d = 2$.
 
-### Página 7.
+### Página 7
 ![alt text](image-4.png)
+
 La variable importante acá es $j$. $j$ representa "cuantos niveles hemos desenrollado".
 
 La condición $c^{k-j} = 1$ significa que hemos llegado al caso base (tamaño 1). Despejando:
 
-$ ck−j=1  ⟹ k−j=0⟹j=k$
+$ ck − j = 1  ⟹ k − j = 0 ⟹j = k$
 
 Y como $n = c^k$, entonces $k = \log_c n$.
 
 Esto nos dice que la profundidad del árbol de recursión es $\log_c n$.
+
+### Análisis por Caso
+Asumiendo que el costo de dividir/combinar es lineal ($d=1$). La variable crítica aquí es la relación entre $a$ y $c$.
+Llegamos a esta expresión:
+
+$T(n) ≤ bn \sum_{i=0}^{\log_c​n}{(a/c)^i}$
+
+Estamos sumando, nivel por nivel (desde i = 0, hasta $i=\log_c n$ abajo), el costo de cada nivel. En el nivel $a^i$ subproblemas, cada uno de tamaño $(n/c)^i$ y el costo de procesar cada uno (sin contar la recursión más profunda) es $b \cdot (\text{tamaño})^d = b \cdot (n/c^i)^d$. Si $d=1$, es $b \cdot n/c^i$.
