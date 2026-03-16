@@ -13,3 +13,8 @@ Imaginemos que tenemos un progblema muy grande. Lo que busca el D&C es:
 
 > OBS: Lo importante es "Las subpartes tienen que ser más pequeñas Y ser el mismo tipo de tarea". Si divido el problema de ordenar una lista pero más chica, funciona. Pero si lo divido en "sumar números" es otro tipo de tarea completamente diferente, ya no es D&C.
 
+### Forma General del D&C:
+![](../../img/image%20copy.png)
++ Caso base: "Si X es suficientemente chico"
++ Paso recursivo: Divido, resuelvo recursivamente, y finalmente combino.
+XD
