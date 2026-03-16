@@ -46,3 +46,44 @@ Dado que asumimos un tamaño de celda fijo (b constante), todas las operaciones 
 
 ### Tiempo de ejecución y complejidad
 Con las reglas claras, podemos definir cómo medimos:
+
+Tiempo de ejecución de un algoritmo A para una instancia I (T_A(I)): es la suma de los costos (según nuestras reglas) de todas las instrucciones que ejecuta el algoritmo cuando se le da una instancia I como entrada.
+
+Tamaño de la instancia (|I|): Para poder graficar el comportamiento del algoritmo, necesitamos una medida que dependa de "cuan grande" es la entrada. Definimos |I| como la cantidad de bits necesarios para almacenar la entrada I.
+> Con nustra regla de celda de tamaño fijo, si la entrada  ocupa n celdas de memoria entonces |I| = b * n = O(n).
+> Es decir, el tamaño de la instancia es directamente proporcional a la cantidad de elementos de entrada. Por eso usamos n (la cantidad de datos) como medida de instancia.
+
+Complejidad temporal de un algoritmo A (f_A(n)):
+Como el tiempo puede variar para diferentes instancias del mismo tamaño, nos interesa el peor caso. Definimos la complejidad como el máximo tiempo que el algoritmo puede tardar en cualquier instancia de tamaño n.
+
+![f_A(n) = max_{I: |I| = n} T_A(I)](../../img/image.png)
+
+### Notación Asintótica (O, Ω, Θ):
+Para no preocuparnos por constantes y detalles menores, usamos la notación asintótica para describir el orden de crecimiento de f_A(n):
+
+***Cota superior (O grande)***: f(n) = O(g(n)) significa que f crece, a lo sumo, tan rápido como g (multiplicada por una constante). Es decir, a partir de un n suficientemente grande, f(n) está siempre por debajo de c * g(n).
+
+> Interpretación: El algoritmo no es peor que g(n).
+
+***Cota inferior (Ω grande)***: f(n) = Ω(g(n)) significa que f crece, al menos, tan rápido como g. A partir de un n grande, f(n) está siempre por encima de c * g(n).
+
+> Interpretación: El algoritmo no es mejor que g(n).
+
+***Cota ajustada (Θ grande)***: f(n) = Θ(g(n)) significa que f y g crecen al mismo ritmo (salvo por constantes). Ocurre cuando f(n) = O(g(n)) y f(n) = Ω(g(n)).
+
+
+| Complejidad | Nombre |
+| :--- | :---: |
+| O(1) | Constante |
+|O(log n)|	Logarítmico|
+| O(n) | Lineal |
+|O(log n)|	Logarítmico|
+| O(n²) | Cuadratico |
+| O(n³) | Cúbico |
+| O(n^k) con k constante | Polinomial |
+| O(d^n) con d > 1 | Exponencial |
+
+> Cualquier función exponencial crece más rápido que cualquier función polinomial. dⁿ no es O(nᵏ).
+
+
+> La función logarítmica crece más lentamente que la lineal. log n es O(n), pero n no es O(log n)
