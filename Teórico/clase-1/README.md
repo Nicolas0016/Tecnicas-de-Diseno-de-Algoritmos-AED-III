@@ -40,4 +40,20 @@ $g(1) = b$ (el costo base)
 
 $g(n) = a g(n/c) + bn^d$ para $n > 1$
 
-**$d$**: es el **Orden del polinomio** que acota el costo de dividir y combinar $f(n)$. Es decir $f(n) = O(n^d)$
+**$d$**: es el **Orden del polinomio** que acota el costo de dividir y combinar $f(n)$. Es decir $f(n) = O(n^d)$.
+
++ Si dividir y combinar es tiempo constante, entonces $d = 0$.
++ Si cuesta lineal, entonces $d = 1$.
++ Si cuesta cudrático, entonces $d = 2$.
+
+### Página 7.
+![alt text](image-4.png)
+La variable importante acá es $j$. $j$ representa "cuantos niveles hemos desenrollado".
+
+La condición $c^{k-j} = 1$ significa que hemos llegado al caso base (tamaño 1). Despejando:
+
+$ ck−j=1  ⟹ k−j=0⟹j=k$
+
+Y como $n = c^k$, entonces $k = \log_c n$.
+
+Esto nos dice que la profundidad del árbol de recursión es $\log_c n$.
