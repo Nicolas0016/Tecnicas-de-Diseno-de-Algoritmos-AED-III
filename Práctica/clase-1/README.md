@@ -659,3 +659,48 @@ def minDif(A,B):
     return min_diff
 ```
 
+¿Cuál es la complejidad del algoritmo?
+
+Análisis de busqueda ternaria:
++ En cada iteración, reducimos el rango de busqueda a $\frac{2n}{3}$
++ Número de iteraciones: $O(\log_{3/2} n)$ = $O(\log n)$
+
+Función de recurrencia:
+
+$$
+T(n) = 
+\begin{cases}
+    O(1) & \text{si} \ n \leq 2 \\
+    T(2n/3) + \Theta(1) & \text{si} \ n > 2
+\end{cases}
+$$
+
+Aplicando el Teorema Maestro:
++ $a = 1$ (número de subproblemas)
++ $c = 3/2$ (factor de reducción)
++ $f(n) = \Theta(1)$ (costo de combinar)
++ $\log_c a = \log_{3/2} 1 = 0$
++ Caso 2: $T(n) = \Theta(n^0 \cdot \log n) = \Theta(\log n)$
+
+Arreglos: A = [1,2,3,4,5], B = [9,7,5,3,1]
+
+Trazando el algoritmo (busqueda ternaria):
+1. Iteración 1: izq = 0, der = 4
+    + tercio1 = 1: |A[1] - B[1]| = |2 - 7| = 5
+    + tercio2 = 3: |A[3] - B[3]| = |4 - 3| = 1
+    + Como 5 > 1, buscar en [1,4]
+2. Iteración 2: izq = 1, der = 4
+    + tercio1 = 2: |A[2] - B[2]| = |3 - 5| = 2
+    + tercio2 = 3: |A[3] - B[3]| = |4 - 3| = 1
+    + Como 2 > 1, buscar en [2,4]
+3. Iteración 3: izq = 2, der = 4
+    + tercio1 = 3: |A[3] - B[3]| = |4 - 3| = 1
+    + tercio2 = 4: |A[4] - B[4]| = |5 - 1| = 4
+    + Como 1 <= 4, buscar en [3,4]
+4. Iteración 4: izq = 3, der = 4    
+    + Solo quedan 2 elementos, verificar ambos:
+    + |A[3] - B[3]| = |4 - 3| = 1
+    + |A[4] - B[4]| = |5 - 1| = 4
+    + Mínimo es 1
+
+Resultado: Diferencia mínima es 1
