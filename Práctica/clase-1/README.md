@@ -108,6 +108,7 @@ T(n) =
 $$
 
 > Respuesta
+
 $$
 T(n) = 
 \begin{cases} 
