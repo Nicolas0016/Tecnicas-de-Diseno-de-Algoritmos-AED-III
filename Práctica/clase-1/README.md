@@ -579,7 +579,7 @@ Ventajas del enfoque Divide and Conquer:
 + Ilustra bien la técnica D&C
 + Paralelizable (las llamadas son independientes)
 
-Ejercicio 14 (Diferencia Mínima):
+## Ejercicio 14 (Diferencia Mínima):
 
 Se tienen dos arreglos de n naturales A y B:
 + A esta ordenado de manera creciente
@@ -658,3 +658,4 @@ def minDif(A,B):
         min_diff = min(min_diff, abs(A[i] - B[i]))
     return min_diff
 ```
+
