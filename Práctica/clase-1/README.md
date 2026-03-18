@@ -578,3 +578,83 @@ Ventajas del enfoque Divide and Conquer:
 + Más eficiente que la fuerza bruta
 + Ilustra bien la técnica D&C
 + Paralelizable (las llamadas son independientes)
+
+Ejercicio 14 (Diferencia Mínima):
+
+Se tienen dos arreglos de n naturales A y B:
++ A esta ordenado de manera creciente
++ B esta ordenado de manera decreciente
++ Ningún valor aparece más de una vez en el mismo arreglo
+
+Para cada posición i consideramos la diferencia absoluta entre los valores de ambos arreglos $|A[i] - B[i]|$. Se desea buscar el mínimo posible de dicha cuenta.
+
+Ejemplo:
++ A = [1, 3, 5, 7, 9]
++ B = [10, 8, 6, 4, 2]
+Diferencias: |1-10|, |3-8|, |5-6|, |7-4|, |9-2| → 9, 5, 1, 3, 7
+El mínimo es 1 (en la posición i = 2)
+
+Objetivo: Implementar minDif con complejidad O(log n).
+
+Observación clave sobre el comportamiento de las diferencias:
+Como A es creciente y B es decreciente: 
++ Al inicio: A[0] es pequeño y B[0] es grande → diferencia grande
++ Al avanzar: A[i] aumenta y B[i] disminuye → diferencia disminuye
++ En algún punto, la diferencia alcanzará un mínimo
++ Al final: A[n-1] es grande y B[n-1] es pequeño → diferencia grande
+
+Propiedad importante: 
+La función f(i) = |A[i] - B[i]| es unimodal, es decir, tiene un único mínimo.
++ Puede decrecer y luego crecer
++ O puede crecer y luego decrecer
++ Tiene un mínimo global
+
+### Busqueda ternaría:
+
+1. Inicialización
+$$left = 0 $$
+$$$$right = n - 1$$
+
+2. División en tercios
+mientras right - left > 2:
+$$mid_1 = left + (right - left) // 3$$
+$$mid_2 = right - (right - left) // 3$$
+
+3. Evaluación
+$$diff_1 = |A[mid_1] - B[mid_1]|$$
+$$diff_2 = |A[mid_2] - B[mid_2]|$$
+
+4. Decisión
++ Si $\text{diff}_1 > \text{diff}_2$:
+    + El mínimo está cerca de $\text{mid}_2$
+    + Actualizamos $right = \text{mid}_2$
+    + Descartamos el primer tercio [left, mid_1)
++ Si $\text{diff}_1 <= \text{diff}_2$:
+    + El mínimo está cerca de $\text{mid}_1$
+    + Actualizamos $left = \text{mid}_1$
+    + Descartamos el tercer tercio (mid_2, right]
+
+5. Búsqueda final
+cuando quedan 3 o menos elementos:
+$$resultado = \min(|A[i] - B[i]|) \text{ para } i \in [left, right]$$
+
+### Función minDif
+```python
+def minDif(A,B):
+    n = len(A)
+    left, right = 0, n - 1
+    while right - left > 2:
+        mid_1 = left + (right - left) // 3
+        mid_2 = right - (right - left) // 3
+        diff_1 = abs(A[mid_1] - B[mid_1])
+        diff_2 = abs(A[mid_2] - B[mid_2])
+        if diff_1 > diff_2:
+            right = mid_2
+        else:
+            left = mid_1
+    # Verificar los últimos elementos
+    min_diff = float('inf')
+    for i in range(left, right + 1):
+        min_diff = min(min_diff, abs(A[i] - B[i]))
+    return min_diff
+```
