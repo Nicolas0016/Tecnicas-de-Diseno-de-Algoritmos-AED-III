@@ -704,3 +704,19 @@ Trazando el algoritmo (busqueda ternaria):
     + Mínimo es 1
 
 Resultado: Diferencia mínima es 1
+
+¿Por qué funciona en $O(\log n)$?
+1. Propiedad de los arreglos:
+    + A creciente: A[i] < A[i+1]
+    + B decreciente: B[i] > B[i+1]
+
+2. Comportamiento de la diferencia:
+    + La función diferencia tiene a lo más un valle
+    + Podemos descartar porciones del arreglo sin examinarlas
+3. Reducción del espacio:
+    + Cada comparación descarta al menos un tercio del espacio de búsqueda
+    + Después de k iteraciones: $espacio <= n \cdot (2/3)^k $
+    + Cuando $n \cdot (2/3)^k = 1$:  $k = O(\log n)$
+
+Conclusión: La estructura especial del problema nos permite búsqueda logarítmica
+
