@@ -170,3 +170,5 @@ Calculamos $\log_c a$ = $\log_2 2$ = 1
 Como $f(n) = \Theta(n) = \Theta(n¹) = \Theta(n^{loc_c a})$ ⇒ estamos en el caso 2 del Teorema Maestro.
 
 Por lo tanto: $T(n) = \Theta(n \log n)$
+
+### Ejercicio 2:
