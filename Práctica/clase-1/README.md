@@ -102,7 +102,7 @@ El costo de combinar es $O(n)$
 $$
 T(n) = 
 \begin{cases} 
-    a \ T(n/c) + f(n) \ \text{si}\ n > 1 \\
+    a \cdot T(n/c) + f(n) \ \text{si}\ n > 1 \\
     1 \ \text{si} \ n = 1
 \end{cases}
 $$
