@@ -102,9 +102,27 @@ El costo de combinar es $O(n)$
 $$
 T(n) = 
 \begin{cases} 
-    a \cdot T(n/c) + f(n) \ \text{si}\ n > 1 \\
+    a \cdot T(n/c) + f(n) \ \text{si}\ n > 1 \\ \\
     1 \ \text{si} \ n = 1
 \end{cases}
 $$
 
 > Respuesta
+$$
+T(n) = 
+\begin{cases} 
+
+    1 \ \text{si} \ n ≤ 1 \\ \\
+    2 \cdot T(n/2) + \Theta(n) \ \text{si}\ n > 1 
+\end{cases}
+$$
+
++ $\Theta(1)$: Caso base (arreglo de un elemento o vacío)
++ $2 \cdot T(n/2)$: Dos llamadas recursivas de tamaño n/2
++ $\Theta(n)$: Costo de combinar los resultados (merge).
+
+> OBS: Para escribir la función T(n) de manera recursiva, identifico:
+>+ El caso base (cuando n es pequeño, típicamente n ≤ 1)
+>+ El número de subproblemas (a)
+>+ El tamaño de cada subproblema (c)
+>+ El costo de combinar (f(n))  
