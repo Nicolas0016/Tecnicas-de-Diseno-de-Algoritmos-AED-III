@@ -94,3 +94,17 @@ El costo de combinar es $O(n)$
 > OBS: Para determinar el costo del combine, analizo la función que integra las soluciones parciales (merge) y veo cuánto trabajo se hace con los datos ya resueltos.
 
 > En merge se recorren todos los elementos de ambas mitades exactamente una vez (comparando y fusionando), por lo que el costo es lineal respecto al total de elementos: $O(n)$. No importa que sean dos mitades, el trabajo total es proporcional a $n$.
+
+
+5. Escribir la función T(n) de manera recursiva.
+> Recuerdo
+
+$$
+T(n) = 
+\begin{cases} 
+    a \ T(n/c) + f(n) \ \text{si}\ n > 1 \\
+    1 \ \text{si} \ n = 1
+\end{cases}
+$$
+
+> Respuesta
