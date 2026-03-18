@@ -97,7 +97,7 @@ El costo de combinar es $O(n)$
 
 
 5. Escribir la función T(n) de manera recursiva.
-> Recuerdo
+> Recuerdo (lo tango que revisar)
 
 $$
 T(n) = 
@@ -126,3 +126,47 @@ $$
 >+ El número de subproblemas (a)
 >+ El tamaño de cada subproblema (c)
 >+ El costo de combinar (f(n))  
+
+6. Determinar la complejidad del algoritmo utilizando el Teorema Maestro.
+> Recuerdo el Teorema Maestro:
+$$
+T(n) = 
+\begin{cases} 
+    a \cdot T(n/c) + f(n) \ \text{si}\ n > 1 \\ \\
+    1 \ \text{si} \ n = 1
+\end{cases}
+$$
+Caso 1: $Si f(n) = O(n^{log_c {a - \epsilon}})$ para $\epsilon > 0$ entonces: $\ T(n) = \Theta(n^{\log_c a})$
+
+Caso 2: $Si f(n) = \Theta(n^{\log_c a} \cdot \log^k n)$ para $k \geq 0$ entonces: $\ T(n) = \Theta(n^{\log_c a} \cdot \log^{k+1} n)$
+
+Caso 3: $Si f(n) = \Omega(n^{\log_c a + \epsilon})$ para $\epsilon > 0$ y $a \cdot f(n/c) \leq k \cdot f(n)$ para alguna constante $k < 1$ entonces: $\ T(n) = \Theta(f(n))$
+
+Donde:
++ $a$: número de subproblemas (en nuestro caso, $a = 2$)
++ $c$: factor de reducción del tamaño (en nuestro caso, $c = 2$)
++ $f(n)$: costo de combinar (en nuestro caso, $f(n) = \Theta(n)$)
++ $n$: tamaño del problema original
++ $\epsilon$: una constante positiva que representa una pequeña diferencia en el crecimiento de las funciones
++ $k$: una constante que representa una relación de crecimiento entre $f(n)$ y $n^{\log_c a}$
+
+> Puedo usar esto: 
++ si $f(n)$ crece más lento que $n^{\log_c a}$, entonces la solución es dominada por el término recursivo (caso 1).
+
++ si $f(n)$ crece exactamente igual que $n^{\log_c a}$, entonces la solución es dominada por el término recursivo multiplicado por un factor logarítmico (caso 2).
+
++ si $f(n)$ crece más rápido que $n^{\log_c a}$, entonces la solución es dominada por el término de combinación (caso 3).
+
+> Respuesta:
+
+Aplicamos el Teorema Maestro con:
+
++ $a = 2$ (número de subproblemas)
++ $c = 2$ (factor de división)
++ $f(n) = \Theta(n)$ (costo de combinar)
+
+Calculamos $\log_c a$ = $\log_2 2$ = 1
+
+Como $f(n) = \Theta(n) = \Theta(n¹) = \Theta(n^{loc_c a})$ ⇒ estamos en el caso 2 del Teorema Maestro.
+
+Por lo tanto: $T(n) = \Theta(n \log n)$
