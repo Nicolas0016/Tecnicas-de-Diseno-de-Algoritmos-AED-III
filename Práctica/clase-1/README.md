@@ -82,3 +82,15 @@ Cada subproblema tiene un tamaño n/2
 + Para el analisis asintótico: ambos son $\Theta(n/2)$
 
 > OBS: Para determinar el tamaño de los subproblemas, miro el **tamaño de la entrada** que se pasa a cada llamada recursiva respecto al tamaño original `n`.
+
+4. ¿Cuál es el costo de combinar los resultados de los subproblemas?
+
+> Respuesta
+El costo de combinar es $O(n)$
++ La función `merge` recorre cada elemento una sola vez.
++ En el peor caso, compara todos los elementos de ambas mitades.
++ Total de operaciones: $$n \ \text{comparaciones} + n \ \text{inserciones} = O(n)$$
+
+> OBS: Para determinar el costo del combine, analizo la función que integra las soluciones parciales (merge) y veo cuánto trabajo se hace con los datos ya resueltos.
+
+> En merge se recorren todos los elementos de ambas mitades exactamente una vez (comparando y fusionando), por lo que el costo es lineal respecto al total de elementos: $O(n)$. No importa que sean dos mitades, el trabajo total es proporcional a $n$.
