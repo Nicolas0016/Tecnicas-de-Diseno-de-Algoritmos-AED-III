@@ -526,3 +526,28 @@ Identificar las partes del algoritmo divide and conquer:
     + Calcular la máxima cruzada.
     + `return max(max_izq, max_der, max_cruzado)`
 
+¿En cuantos problemas se divide el problema?
+
+Respuesta: se divide en 2 subproblemas
++ Mitad Izquierda: arr[izq ... medio]
++ Mitad Derecha: arr[medio+1 ... der]
+
+¿De que tamaño son estos subproblemas?
+
+Respuesta: Cada subproblema tiene tamaño n/2
+
+¿Cual es el costo de combinar?
+Respuesta: $O(n)$ debido al cálculo de suma cruzada
++ Recorrer desde el medio hacia la izquierda: $O(n/2)$
++ Recorrer desde el $medio+1$ hacia la derecha: O(n/2)
++ Total $O(n)$ 
+Escribir la función T(n) de manera recursiva:
+
+respuesta: 
+$$
+T(n) = 
+\begin{cases}
+    \Theta(1) & \text{si} \ n = 1 \\
+    2 T(n/2) + \Theta(n) & \text{si} \ n > 1
+\end{cases}
+$$
