@@ -551,3 +551,30 @@ T(n) =
     2 T(n/2) + \Theta(n) & \text{si} \ n > 1
 \end{cases}
 $$
+
+Determinar la complejidad del algoritmo utilizando el Teorema Maestro:
+
+Párametros:
++ $a = 2$ (número de subproblemas)
++ $c = 2$ (factor de reducción)
++ $f(n) = \Theta(n)$ (costo de combinar)
+
+Calculamos $\log_c a$ = $\log_2 2$ = 1
+
+Tenemos $f(n) = \Theta(n) = \Theta(n^1) = \Theta(n^{\log_c a})$, entonces estamos en el caso 2 del Teorema Maestro.
+
+Por lo tanto: $\boxed{T(n) = \Theta(n \log n)}$
+
+Diferentes enfoques del problema:
+
+|Algoritmo|Complejidad|Descripción|
+|---------|-----------|-----------|
+|Fuerza Bruta|O(n^3)|Probar todos los pares (i, j)|
+|Fuerza Bruta Optimizada|O(n^2)|Sumas Aculomadas|
+|Divide and Conquer|O(n log n)|This ejercicio|
+|Kadane's Algorithm|O(n)|Programación dinámica|
+
+Ventajas del enfoque Divide and Conquer:
++ Más eficiente que la fuerza bruta
++ Ilustra bien la técnica D&C
++ Paralelizable (las llamadas son independientes)
