@@ -448,3 +448,81 @@ Difernetes estrategias para encontrar el máximo:
 | Divide and Conquer | O(log n) | Descartar mitades |
 
 Ventajas del enfoque Divide and Conquer:
++ Aprovecha la estructura del arreglo montaña.
++ Complejidad logarítmica, mucho más eficiente que la fuerza bruta
++ Eficiente en arreglos grandes
+
+Aplicación practica:
++ Busqueda de picos de señales
++ Optimización de funciones unimodales
++ Análisis de datos con tendencias crecientes y decrecientes
+
+
+## Ejercicio 8 (MaximaSubsecuencia):
+Dada una secuencia de n enteros, se desea encontrar el máximo valor que se puede obtener sumando elementos continuos.
+
+Diseñar un algoritmo divide and conquer para resolver este problema en complejidad O(n log n).
+
+Ejemplo: Para la secuencia [3, -1, 4, 8, -2, 2, 7, 5], este valor es 14, que se obtiene de la subsecuencia [3,-1, 4, 8 ].
+
+> Este problema también es conocido como el problema de la máxima subsecuencia o el problema de la suma máxima de subarreglo (Maximum Subarray Problem).
+
+Idea principal: Dividir el arreglo por la mitad y considerar tres casos:
+
+1. Caso izquierda: La subsecuencia máxima está completamente en la mitad izquierda.
+2. Caso derecha: La subsecuencia máxima está completamente en la mitad derecha.
+3. Caso cruzado: La subsecuencia máxima cruza el punto medio, es decir, incluye elementos de ambas mitades.
+
+Solución: El máximo de estos tres casos:
+```python
+max_suma = max(caso_izquierda, caso_derecha, caso_cruzado):
+```
+> El caso cruzado requiere un trato especial.
+
+¿Cómo calcular la suma máxima que cruza el medio?
+
+La subsecuencia debe incluir:
++ Al menos el último elemento de la mitad izquierda.
++ Al menos el primer elemento de la mitad derecha.
+
+Algoritmo:
+1. Desde el medio hasta la izquierda: encontrar la suma máxima
+2. Desde el medio + 1 hacia la derecha: encontrar la suma máxima
+3. Sumar ambas máximas para obtener el caso cruzado.
+
+Ejemplo: [3, -1, 4, 8, -2, 2, 7, 5]
++ Máximo izquierda (desde el medio): 3 + (-1) + 4 + 8 = 14
++ Máximo derecha (desde el medio + 1): -2 + 2 = 0
++ Suma cruzada: 14 + 0 = 14
+
+```python
+def max_suma_subsecuencia(arr, izq, medio, der):
+    # Suma máxima en la mitad izquierda
+    suma_izq = float('-inf')
+    suma_actual = 0
+    for i in range(medio, izq - 1, -1):
+        suma_actual += arr[i]
+        suma_izq = max(suma_izq, suma_actual)
+
+    # Suma máxima en la mitad derecha
+    suma_der = float('-inf')
+    suma_actual = 0
+    for i in range(medio + 1, der + 1):
+        suma_actual += arr[i]
+        suma_der = max(suma_der, suma_actual)
+
+    return suma_izq + suma_der
+```
+Complejidad de esta función: $O(n)$ donde $n = der - izq + 1$ 
+
+Identificar las partes del algoritmo divide and conquer:
++ Divide:
+    + `medio = (izq + der) // 2` (calcula el punto medio)
+    + Separar el arreglo en dos mitades
++ Conquer:
+    + `max_izq = max_suma_subsecuencia(arr, izq, medio, der)` (calcula el máximo en la mitad izquierda)
+    + `max_der = max_suma_subsecuencia(arr, medio + 1, der)` (calcula el máximo en la mitad derecha)
++ Combine:
+    + Calcular la máxima cruzada.
+    + `return max(max_izq, max_der, max_cruzado)`
+
