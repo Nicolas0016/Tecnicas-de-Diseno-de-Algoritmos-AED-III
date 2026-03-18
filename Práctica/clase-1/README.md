@@ -72,3 +72,13 @@ Se divide en 2 subproblemas
 + La mitad derecha: arr[medio:]
 
 > OBS: Para detectar en cuántos subproblemas se divide, simplemente **cuento las llamadas recursivas** que aparecen en el código. Cada llamada recursiva representa un subproblema diferente. 
+
+3. ¿De que tamaño son estos subproblemas?
+> Respuesta
+Cada subproblema tiene un tamaño n/2 
++ Si el arreglo original tiene n elementos
++ La mitad izquierda tiene |n/2| elementos
++ La mitad derecha tiene |n/2| elementos 
++ Para el analisis asintótico: ambos son $\Theta(n/2)$
+
+> OBS: Para determinar el tamaño de los subproblemas, miro el **tamaño de la entrada** que se pasa a cada llamada recursiva respecto al tamaño original `n`.
