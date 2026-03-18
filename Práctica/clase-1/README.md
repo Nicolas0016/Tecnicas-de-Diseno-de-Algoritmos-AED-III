@@ -720,3 +720,19 @@ Resultado: Diferencia mínima es 1
 
 Conclusión: La estructura especial del problema nos permite búsqueda logarítmica
 
+Diferentes enfoques para resolver el problema:
+| Algoritmo | Complejidad | Descripción |
+|-----------|-------------|-------------|
+| Fuerza Bruta | O(n) | Calcular todas las diferencias
+| Busqueda binaria | O(log n) | Aprovechar la unimodalidad |
+| Busqueda ternaria | O(log n) | Dividir en tercios |
+
+Ventajas de la solución D&C:
++ Complejidad logarítmica óptima
++ Aprovecha la estructura de los datos
++ No necesita examinar todas las posiciones
+
+Aplicaciones similares:
++ Búsqueda de funciones unimodales
++ Optimización convexa
++ Búsqueda de puntos de equilibrio
