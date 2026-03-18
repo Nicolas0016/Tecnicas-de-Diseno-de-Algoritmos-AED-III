@@ -1,4 +1,4 @@
-### Ejercicio 1:
+## Ejercicio 1:
 
 Dado el algoritmo de mergesort, implementado en el siguiente
 código Python:
@@ -171,7 +171,7 @@ Como $f(n) = \Theta(n) = \Theta(n¹) = \Theta(n^{loc_c a})$ ⇒ estamos en el ca
 
 Por lo tanto: $\boxed{T(n) = \Theta(n \log n)}$
 
-### Ejercicio 2:
+## Ejercicio 2:
 Dado un algoritmo de búsqueda binaria, implementado en el siguiente código Python:
 1. Identicar qué líneas son el divide, cuáles son el conquer y cuáles el combine.
 2. En cuántos subproblemas se divide?
@@ -266,3 +266,185 @@ Calculamos $\log_c a$ = $\log_2 1$ = 0
 Como $f(n) = \Theta(1) = \Theta(n^0) = \Theta(n^{\log_c a})$ ⇒ estamos en el caso 2 del Teorema Maestro.
 
 Por lo tanto: $\boxed{T(n) = \Theta(\log n)}$
+
+
+## Cuando un algoritmo no es divide y vencerás.
+BusquedaLienalModificicada(A, elem)
+    If |A| == 0 return False
+    If A[0] == elem return True
+    return BusquedaLienalModificada(A[1:], elem) OR BusquedaLienalModificada(A[:-1], elem)
+
+División de problema:
++ Subproblema 1: Tamaño 1 (un elemento)
++ Subproblema 2: Tamaño n-1 (el resto del arreglo)
+
+### ¿Por qué no es divide y vencerás?
+Caracteristicas del divide y vencerás:
+1. **Dividir** el problema en subproblemas más pequeños.
+2. Subproblemas de tamaño **considerablemente menor**.
+3. División **balanceada**.
+4. Reducción **significativa** del tamaño.
+
+BusquedaLienalModificada:
++ Divide el problema en dos subproblemas: uno de tamaño 1 (el primer elemento) y otro de tamaño n-1 (el resto del arreglo).
++ Subproblema principal: **n - 1**
++ Reducción: **Solo un elemento**
++ División: **desbalanceada** (un subproblema es mucho más grande que el otro)
+Recurrencia: 
+$$ T(n) = T(1) + T(n-1) + O(1) $$
+$$T(n) = T(n-1) + O(1)$$
+Resultado: $T(n) = O(n)$ <- Es una recursión lineal.
+
+### Segunda versión:
+BusquedaLienalModificada(A, elem)
+    If |A| == 0 return False
+    If A[0] == elem return True
+    return BusquedaLienalModificada(A[1:|A|//2], elem) 
+    OR BusquedaLienalModificada(A[|A|//2:], elem)
+
+División de problema:
++ Subproblema 1: Tamaño n/2 
++ Subproblema 2: Tamaño n/2 
+
+Verificación D&C:
+1. [x] División en subproblemas
+2. [x] Tamaño n/2 (fracción del original)
+3. [x] División balanceada
+4. [x] Reducción significativa
+
+BusquedaLienalModificadaV2:
++ División: n → n/2 + n/2
++ Reducción: 50% en cada nivel
++ División perfectamente balanceada
++ Cumple el paradigma D&C
+
+Recurrencia:
+$$ T(n) = 2 \cdot T(n/2) + O(1) $$
+Aplicando el Teorema Maestro:
++ $a = 2$ (número de subproblemas)
++ $c = 2$ (factor de reducción)
++ $f(n) = O(1)$ (costo de combinar)
+
+Calculamos $\log_c a$ = $\log_2 2$ = 1
+
+Resultado como $f(n) = O(1) = O(n^0)$, entonces $f(n)$ crece más lento que $n^{\log_c a}$, por lo que estamos en el caso 1 del Teorema Maestro.
+Por lo tanto: $\boxed{T(n) = \Theta(n)}$
+Aunque es D&C verdadero, no mejora la complejidad sigue siendo $O(n)$
+
+#### Conclusiones:
+No todo algoritmo recursivo que divide el problema es divide and conquer.
+
+NO es D&C si:
++ División desbalanceada extrema.
++ Subproblema de tamaño n - k.
++ Reducción no significativa.
++ Reducción lineal disfrazada.
+
+SÍ es D&C si:
++ División balanceada.
++ Subproblemas de tamaño n/c.
++ Reducción por factor constante.
++ Verdadera descomposición.
+
+Divide and Conquer requiere una división 
+## Ejercicio 6 (MaximoMontaña):
+Un arreglo de enteros se denomina "montaña" si esta compuesto por una secuencia estrictamente creciente seguida de una estrictamente decreciente. 
+
+Dado un arreglo montaña de longitud n, dar un algoritmo que encuentre el máximo del arreglo en complejidad O(log n).
+
+Ejemplo: Para el arreglo [-1, 3, 8, 22, 30, 22, 8, 4, 2, 1], el máximo está en el índice 4 (valor 30).
+
+Objetivo: 
++ Diseñar un algoritmo divide and conquer.
++ Demostrar que tiene complejidad $O(\log_2 n)$.
++ Aplicar el Teorema Maestro. 
+
+>OBS: En un arreglo montaña, el máximo es un punto donde cambia de creciente a decreciente.
+
+Estrategia Divide and Conquer:
+1. Dividir el arreglo al medio.
+2. Comparar el elemento del medio con sus vecinos.
+3. Decidir en que mitad buscar.
+
+Casos posibles para arr[medio]:
++ Es mayor que ambos vecinos → es el máximo.
++ Es menor que el vecino izquierdo → el máximo está en la mitad izquierda.
++ Es menor que el vecino derecho → el máximo está en la mitad derecha.
+
+```python
+def maximo_montana(arr, izq=0, der=None):
+    if der is None:
+        der = len(arr) - 1
+    if izq == der:
+        return izq  # Solo un elemento, es el máximo   
+    medio = (izq + der) // 2
+
+    # Comparar con vecino
+    if  medio > 0 and arr[medio] < arr[medio - 1]:
+        # EL máximo está en la mitad izquierda
+        return maximo_montana(arr, izq, medio - 1)  
+    elif medio < len(arr) - 1 and arr[medio] < arr[medio + 1]:
+        # EL máximo está en la mitad derecha
+        return maximo_montana(arr, medio + 1, der)  
+    else:
+        # arr[medio] es el máximo
+        return medio  
+```
+Identificar las partes del algoritmo divide and conquer:
++ Divide: `medio = (izq + der) // 2` (calcula el punto medio)
+
++ Conquer: Las llamadas recursivas a `maximo_montana    (arr, izq, medio - 1)` y `maximo_montana(arr, medio + 1, der)`. Solo se ejecuta una de las dos llamadas.
+
++ Combine: No hay una fase de combinación explícita, ya que cada llamada recursiva retorna directamente el resultado sin necesidad de integrar resultados parciales.
+
+En cuantos subproblemas se divide?
++ Se divide en 1 subproblema, ya que solo se explora una mitad dependiendo
++ La decisión depende de las comparaciones de los vecinos:
+    + Si el medio es menor que el vecino izquierdo, se busca en la mitad izquierda.
+    + Si el medio es menor que el vecino derecho, se busca en la mitad derecha.
+    + Si el medio es mayor que ambos vecinos, se retorna como máximo.
+
+Escribir la función T(n) de manera recursiva:
+$$
+T(n) = 
+\begin{cases} 
+    1 \ & \text{si} \ n = 1 \\
+    T(n/2) + \Theta(1) &  \text{si}\ n > 1
+\end{cases}
+$$
++ $\Theta(1)$: Caso base (arreglo de un elemento)
++ $T(n/2)$: Una llamada recursiva de tamaño n/2
++ $\Theta$: Costo de comparaciones con los vecinos
+
+Determinar la complejidad del algoritmo utilizando el Teorema Maestro:
+Aplicamos el Teorema Maestro con:
++ $a = 1$ (número de subproblemas)
++ $c = 2$ (factor de reducción)
++ $f(n) = \Theta(1)$ (costo de combinar)
+
+Calculamos $\log_c a$ = $\log_2 1$ = 0
+
+Tenemos que $f(n) = \Theta(1) = \Theta(n^0)$, entonces $f(n)$ crece más lento que $n^{\log_c a}$, por lo que estamos en el caso 1 del Teorema Maestro.
+
+Por lo tanto: $\boxed{T(n) = \Theta(\log n)}$
+
+Por qué funciona el algoritmo?
+Propiedades del arreglo montaña:
++ Existe un único máximo global.
++ A la izquierda del máximo: secuencia creciente.
++ A la derecha del máximo: secuencia decreciente.
+
+Invariante: El máximo siempre se encuentra en el intervalo [izq, der] actual. 
+
+Demostración por casos:
+1. Si arr[medio] < arr[medio - 1]: El máximo está a la izquierda, ya que la secuencia es creciente hacia el máximo.
+2. Si arr[medio] < arr[medio + 1]: El máximo está a la derecha, ya que la secuencia es decreciente hacia el máximo.
+3. Si arr[medio] es mayor que ambos vecinos: arr[medio] es el máximo, ya que es el punto de inflexión entre la secuencia creciente y decreciente.
+
+Difernetes estrategias para encontrar el máximo:
+| Enfoque | Complejidad | Descripción |
+|---------|-------------|-------------|
+| Fuerza Bruta | O(n) | Recorrer todo el arreglo|
+| Divide and Conquer | O(log n) | Descartar mitades |
+
+Ventajas del enfoque Divide and Conquer:
