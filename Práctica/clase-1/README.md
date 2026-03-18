@@ -102,8 +102,8 @@ El costo de combinar es $O(n)$
 $$
 T(n) = 
 \begin{cases} 
-    a \cdot T(n/c) + f(n) \ \text{si}\ n > 1 \\ \\
-    1 \ \text{si} \ n = 1
+    a \cdot T(n/c) + f(n) & \text{si}\ n > 1 \\ \\
+    1 & \text{si} \ n = 1
 \end{cases}
 $$
 
@@ -112,8 +112,8 @@ $$
 $$
 T(n) = 
 \begin{cases} 
-    1 \ \text{si} \ n ≤ 1 \\
-    2 \cdot T(n/2) + \Theta(n) \ \text{si}\ n > 1 
+    1 \ & \text{si} \ n ≤ 1 \\
+    2 \cdot T(n/2) + \Theta(n) & \text{si}\ n > 1 
 \end{cases}
 $$
 
@@ -169,6 +169,100 @@ Calculamos $\log_c a$ = $\log_2 2$ = 1
 
 Como $f(n) = \Theta(n) = \Theta(n¹) = \Theta(n^{loc_c a})$ ⇒ estamos en el caso 2 del Teorema Maestro.
 
-Por lo tanto: $T(n) = \Theta(n \log n)$
+Por lo tanto: $\boxed{T(n) = \Theta(n \log n)}$
 
 ### Ejercicio 2:
+Dado un algoritmo de búsqueda binaria, implementado en el siguiente código Python:
+1. Identicar qué líneas son el divide, cuáles son el conquer y cuáles el combine.
+2. En cuántos subproblemas se divide?
+3. De qué tamaño son estos subproblemas?
+4. Cuál es el costo de combinar los resultados de los subproblemas?
+5. Escribir la función T (n) de manera recursiva.
+6. Determinar la complejidad del algoritmo utilizando el Teorema Maestro.
+
+```python
+def busqueda_binaria(arr, objetivo, izquierda = 0, derecha=len(arr)-1):
+    if izquierda > derecha:
+        return False # Elemento no encontrado
+
+    medio = (izquierda + derecha) // 2
+
+    if arr[medio] == objetivo:
+        return medio
+    elif arr[medio] > objetivo:
+        return busqueda_binaria(arr, objetivo, izquierda, medio - 1)
+    else:
+        return busqueda_binaria(arr, objetivo, medio + 1, derecha)
+```
+1. Identicar qué líneas son el divide, cuáles son el conquer y cuáles el combine.
+> Respuesta
++ Divide:
+   + `medio = (izquierda + derecha) // 2` (calcula el punto medio)
+   + Comparación `arr[medio] > objetivo` para decidir la dirección de búsqueda.
+
++ Conquer:
+   + `return busqueda_binaria(arr, objetivo, izquierda, medio - 1)`
+   + `return busqueda_binaria(arr, objetivo, medio + 1, derecha)`
++ Combine:
+   + No hay fase de combinación - simplemente se retorna el
+resultado
+    + La búsqueda binaria no necesita combinar resultados
+> OBS: Para detectar las fases, busco:
+>+ Divide: Donde se parte el problema original (calculo del medio y decisión de dirección)
+>+ Conquer: Las llamadas recursivas que resuelven los subproblemas (búsqueda en la mitad izquierda o derecha)
+>+ Combine: En este caso, no hay una fase de combinación explícita, ya que cada llamada recursiva retorna directamente el resultado sin necesidad de integrar resultados parciales.
+
+2. En cuántos subproblemas se divide?
+> Respuesta
+
+Se divide en 1 subproblema
++ A diferencia del MergeSort que explora ambas mitades, la búsqueda binaria solo explora una mitad dependiendo de la comparación con el objetivo.
+
+3. De qué tamaño son estos subproblemas?
+>Respuesta
+El subproblema tiene un tamaño de n/2
++ En cada llamada recursiva, el tamaño del problema se reduce a la mitad, ya sea buscando en la mitad izquierda o derecha del arreglo.
++ Si el arreglo original tiene n elementos:
+    + Primera llamada: tamaño n
+    + Segunda llamada: tamaño n/2
+    + Tercera llamada: tamaño n/4
+    + ... hasta llegar al caso base.
++ Máximo número de llamadas: $\log_2 n$
+4. Cuál es el costo de combinar los resultados de los subproblemas?
+> Respuesta
+
+El costo de combinar es $O(1)$
++ No hay una fase de combinación explícita en la búsqueda binaria.
++ Solo se retorna el resultado:
+    + El índice si se encuentra el objetivo.
+    + False si no se encuentra.
++ Las operaciones adicionales son:
+    + Cálculo del medio: $O(1)$
+    + Comparar con el objeto: $O(1)$
+
+5. Escribir la función T(n) de manera recursiva.
+
+> Respuesta
+$$
+T(n) = 
+\begin{cases} 
+    1 \ & \text{si} \ n ≤ 1 \\
+    T(n/2) + \Theta(1) &  \text{si}\ n
+    > 1
+\end{cases}
+$$
++ $\Theta(1)$: Caso base (arreglo de un elemento o vacío)
++ $T(n/2)$: Una llamada recursiva de tamaño n/2
++ No hay costo de combinación adicional, ya que se retorna directamente el resultado.
+
+6. Determinar la complejidad del algoritmo utilizando el Teorema Maestro.
+> Respuesta: Aplicamos el Teorema Maestro con:
++ $a = 1$ (número de subproblemas)
++ $c = 2$ (factor de división)
++ $f(n) = \Theta(1)$ (costo de combinar)
+
+Calculamos $\log_c a$ = $\log_2 1$ = 0
+
+Como $f(n) = \Theta(1) = \Theta(n^0) = \Theta(n^{\log_c a})$ ⇒ estamos en el caso 2 del Teorema Maestro.
+
+Por lo tanto: $\boxed{T(n) = \Theta(\log n)}$
