@@ -112,8 +112,7 @@ $$
 $$
 T(n) = 
 \begin{cases} 
-
-    1 \ \text{si} \ n ≤ 1 \\ \\
+    1 \ \text{si} \ n ≤ 1 \\
     2 \cdot T(n/2) + \Theta(n) \ \text{si}\ n > 1 
 \end{cases}
 $$
