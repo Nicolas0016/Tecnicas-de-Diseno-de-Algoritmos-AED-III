@@ -202,6 +202,7 @@ Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq
 $$P(k): \sum_{i=1}^{k} i³ = (\frac{k(k+1)}{2})²$$
 
 Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
+
 $$P(k + 1): \sum_{i=1}^{k+1} i³ = (\frac{(k+1)(k+2)}{2})²$$
 
 Demostración:
@@ -245,6 +246,7 @@ Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq
 $$P(k): \sum_{i=1}^{k} i\cdot i! = (k+1)! - 1$$
 
 Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
+
 $$P(k + 1): \sum_{i=1}^{k+1} i\cdot i! = (k+2)! - 1$$
 
 Demostración:
@@ -301,9 +303,11 @@ Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq
 $$P(k): \sum_{i=0}^{k} 2^{i} = 2^{k+1} - 1$$
 
 Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
+
 $$P(k + 1): \sum_{i=0}^{k+1} 2^{i} = 2^{k+2} - 1$$
 
 Demostración:
+
 $$
 \begin{aligned}
 \sum_{i=0}^{k+1} 2^{i} = 2^{k+2} - 1 \\
