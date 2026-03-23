@@ -328,3 +328,41 @@ $P(n, h)$ donde $n$ es el número de años y $h$ es la población inicial
 $P(n, h) = h \cdot 2^{n}$
 
 Luego para responder la pregunta tengo que ver que $\boxed{P(n, 10) = 10 \cdot 2^{n}}$
+
+## 4. Probar por Inducción
+
+Probar por inducción que para $n\geq5$ se cumple que $2^n > n^2$
+
+>Respuesta
+
+Caso base: $n=5$
+
+$$
+\begin{cases}
+2^5 = 32 \\ & \text{Se verifica} \\ 5^2 = 25
+\end{cases}
+$$
+
+Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq 5$
+
+$$P(k): 2^k > k^2$$
+
+Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
+
+$$P(k + 1): 2^{k+1} > (k+1)^2$$
+
+Demostración:
+
+$$
+\begin{aligned}
+2^{k+1} > (k+1)^2 \\
+2 \cdot 2^k > (k+1)^2 \\
+2 \cdot k^2 > (k+1)^2 \\
+2k^2 > k^2 + 2k + 1 \\
+k^2 - 2k - 1 > 0
+\end{aligned}
+$$
+
+Como la función $f(k) = k^2 - 2k - 1$ es una parábola con concavidad positiva y su vértice está en $k = 1$, entonces para $k \geq 5$ se cumple que $k^2 - 2k - 1 > 0$
+
+>Por lo tanto, la proposición es cierta para todo $n \geq 5$.
