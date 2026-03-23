@@ -240,3 +240,54 @@ $$
 $$
 
 >Por lo tanto, la proposición es cierta para todo $n \geq 1$.
+
+## 2. Encontrar una fórmula 
+
+Encontrar una fórmula para la siguiente suma y demostrar por inducción: $1 + 2 + 2² + \dots + 2^{n}$.
+
+>Respuesta
+
+Reescribimos la proposición:
+$$2⁰ + 2¹ + 2² + \dots + 2^{n}= \sum_{i=0}^{n} 2^{i}$$
+
+Calculo los primeros términos:
+
+$n=0: 2⁰ = 1$
+
+$n=1: 2⁰ + 2¹ = 1 + 2 = 3$
+
+$n=2: 2⁰ + 2¹ + 2² = 1 + 2 + 4 = 7$
+
+$n=3: 2⁰ + 2¹ + 2² + 2³ = 1 + 2 + 4 + 8 = 15$
+
+Observo que los resultados son de la forma $2^{n+1} - 1$
+
+Luego tengo que ver que $\sum_{i=0}^{n} 2^{i} = 2^{n+1} - 1$
+
+Caso base: $n=0$
+$$
+\begin{cases}
+\sum_{i=0}^{0} 2^{i} = 2^{0} = 1 \\
+& \text{Se verifica} \\
+2^{0+1} - 1 = 2^{1} - 1 = 2 - 1 = 1
+\end{cases}
+$$
+
+Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq 0$
+$$P(k): \sum_{i=0}^{k} 2^{i} = 2^{k+1} - 1$$
+
+Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
+$$P(k + 1): \sum_{i=0}^{k+1} 2^{i} = 2^{k+2} - 1$$
+
+Demostración:
+$$
+\begin{aligned}
+\sum_{i=0}^{k+1} 2^{i} = 2^{k+2} - 1 \\
+\sum_{i=0}^{k} 2^{i} + 2^{k+1} = 2^{k+2} - 1 \\
+2^{k+1} - 1 + 2^{k+1} = 2^{k+2} - 1 \\
+2 \cdot 2^{k+1} - 1 = 2^{k+2} - 1 \\
+2^{k+2} - 1 = 2^{k+2} - 1
+\end{aligned}
+$$
+
+>Por lo tanto, la proposición es cierta para todo $n \geq 0$.
