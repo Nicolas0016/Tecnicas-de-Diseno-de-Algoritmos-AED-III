@@ -147,3 +147,122 @@ def potencia(a, b):
 ```
 > $$T(n) = T(\frac{n}{2}) + O(1)$$
 > $$T(n) = O(\log n)$$
+
+# Ejercicio 6
+Un arreglo de enteros se denomina *montaña* si está compuesto por una secuencia estrictamente creciente seguida de una estrictamente decreciente. Dado un arreglo *montaña* de longitud n, dar un algoritmo que encuentre el máximo del arreglo en complejidad $O(log n)$. Por ejemplo, para un arreglo $[-1, 3, 8, 22, 30, 22, 8, 4, 2, 1]$, el máximo está en la posición 4 y vale 30.
+
+> Respuesta
+```python
+def encontrar_pico(arr):
+    medio = len(arr) // 2
+    if len(arr) == 1:
+        return arr[0]
+    elif arr[medio] > arr[medio + 1]:
+        return encontrar_pico(arr[:medio])
+    else:
+        return encontrar_pico(arr[medio + 1:])
+```
+
+# Ejercicio 7 
+Calcule la complejidad de un algoritmo utilizando $T(n)$ pasos para una entrada de tamaño $n$, donde $T$ cumple:
+
+1. $T(n) = T(n-2)+5$
+2. $T(n) = T(n-1)+n$
+3. $T(n) = T(n-1) + \sqrt{n}$
+4. $T(n) = T(n-1) + n²$
+5. $T(n) = 2T(n-1)$
+6. $T(n) = T(n/2) + n$
+7. $T(n) = T(n/2) + \sqrt{n}$
+8. $T(n) = T(n/2) + n²$
+9. $T(n) = 2T(n-4)$
+10. $T(n) = 2T(n/2) + \log(n)$
+11. $T(n) = 3T(n/4)$
+12. $T(n) = 3T(n/4) + n$
+
+Intentar estimar la complejidad para cada ítem directamente y luego calcularla utilizando el teorema maestro de ser posible. Para simplificar los cálculos se puede asumir que n es potencia o multiplo de 2 o 4 según sea conveniente.
+
+> Respuesta
+
+1. $T(n) = \Theta(n)$
+2. $T(n) = \Theta(n^2)$
+3. $T(n) = \Theta(n \sqrt{n})$
+4. $T(n) = \Theta(n^3)$
+5. $T(n) = \Theta(2^n)$
+6. $T(n) = \Theta(n)$
+7. $T(n) = \Theta(\sqrt{n})$
+8. $T(n) = \Theta(n^2)$
+9. $T(n) = \Theta(2^n)$
+10. $T(n) = \Theta(n)$
+11. $T(n) = \Theta(n^{\log_4 3})$
+12. $T(n) = \Theta(n)$
+
+# Ejercicio 8
+Dada una secuencia de $n$ enteros, se desea encontrar el máximo valor que se puede obtener sumando elementos continuos. Diseñar un algoritmo basado en la técnica de dividir y conquistar que resuelva el problema en $O(n \log n)$. Por ejemplo, para la secuencia $[-2, 1, -3, 4, -1, 2, 1, -5, 4]$, el máximo valor es 6, obtenido sumando los elementos $[4, -1, 2, 1]$.
+
+```python
+def maximo_subarreglo(arr):
+    if len(arr) == 1:
+        return arr[0]
+    medio = len(arr) // 2
+    max_izq = maximo_subarreglo(arr[:medio])
+    max_der = maximo_subarreglo(arr[medio:])
+    max_cruce = maximo_cruce(arr, medio)
+    return max(max_izq, max_der, max_cruce)
+
+def maximo_cruce(arr, medio):
+    max_izq = -float('inf')
+    suma = 0
+    for i in range(medio - 1, -1, -1):
+        suma += arr[i]
+        if suma > max_izq:
+            max_izq = suma
+    max_der = -float('inf')
+    suma = 0
+    for i in range(medio, len(arr)):
+        suma += arr[i]
+        if suma > max_der:
+            max_der = suma
+    return max_izq + max_der
+```
+
+> $$T(n) = 2T(\frac{n}{2}) + O(n)$$
+> $$T(n) = O(n \log n)$$
+
+# Ejercicio 9
+Suponga que se tiene un método de *potencia* que dada una matriz A de orden 4 x 4 y un número n, computa la matriz $A^n$. 
+Dada una matriz cuadrada A de orden 4 x 4 y un número natural n que es potencia de 2, desarrollar, utilizando la técnica dividir y conquistar y el método *potencia*, que permita calcular:
+
+$$A¹ + A² + A³ + ... + A^n$$
+
+Preocure que el algoritmo propuesto aplique el método *potencia*, sume y haga productos de matrices una cantidad estrictamente menor que O(n).
+```python
+def potencia(A, n):
+    if n == 1:
+        return A
+    elif n % 2 == 0:
+        return potencia(A, n // 2) * potencia(A, n // 2)
+    else:
+        return A * potencia(A, n // 2) * potencia(A, n // 2)
+    
+def suma_potencias(A, n):
+    if n == 1:
+        return A
+    return suma_potencias(A, n // 2) + potencia(A, n // 2) * suma_potencias(A, n // 2)
+```
+
+> $$T(n) = T(\frac{n}{2}) + O(1)$$
+> $$T(n) = O(\log n)$$
+
+# Ejercicio 10:
+Dado un árbol binario cualquiera, diseñar un algoritmo de dividir y conquistar que devuelva la máxima diferencia entre dos nodos. El algoritmo no debe hacer recorridos innecesarios sobre el árbol.
+
+> Para saber el camino más largo de un árbol, posiblemente necesite conocer más que sólo los caminos más largos de sus subárboles.
+
+> Respuesta
+```python
+def max_diff(arbol):
+    if arbol is None:
+        return 0
+    return max(max_diff(arbol.izq), max_diff(arbol.der), arbol.val - min_val(arbol.izq), arbol.val - min_val(arbol.der))
+```
+
