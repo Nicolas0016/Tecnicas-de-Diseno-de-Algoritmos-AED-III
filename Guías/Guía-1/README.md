@@ -131,3 +131,19 @@ def es_fijo(arr, izq, der):
 ```
 > $$T(n) = T(\frac{n}{2}) + O(1)$$
 > $$T(n) = O(\log n)$$
+
+# Ejercicio 5
+Encuentre un algoritmo para calcular $a^b$ en tiempo logarítmico en $b$. Piense en como reutilizar los resultados ya calculados.
+
+> Respuesta
+```python
+def potencia(a, b):
+    if b == 0:
+        return 1
+    elif b % 2 == 0:
+        return potencia(a, b // 2) * potencia(a, b // 2)
+    else:
+        return a * potencia(a, b // 2) * potencia(a, b // 2)
+```
+> $$T(n) = T(\frac{n}{2}) + O(1)$$
+> $$T(n) = O(\log n)$$
