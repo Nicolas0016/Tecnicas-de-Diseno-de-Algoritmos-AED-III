@@ -12,6 +12,7 @@ $1 + 2 + \dots + n = \sum_{i=1}^{n} i$
 Luego tengo que ver que $\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$
 
 Caso base: $n=1$
+
 $$
 \begin{cases}
 \sum_{i=1}^{1} i = 1 \\
@@ -21,16 +22,19 @@ $$
 $$
 
 Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq 1$
+
 $$
 P(k): \sum_{i=1}^{k} i = \frac{k(k+1)}{2}
 $$
 
 Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
+
 $$
 P(k+1): \sum_{i=1}^{k+1} i = \frac{(k+1)(k+2)}{2}
 $$
 
 Demostración:
+
 $$
 \begin{aligned}
 \sum_{i=1}^{k+1} i = \frac{(k + 1)(k+2)}{2} \\
@@ -47,11 +51,13 @@ $$
 
 > Respuesta
 Reescribimos la proposición:
+
 $1 + 3 + 5 + \dots + (2n-1) = \sum_{i=1}^{n} (2i-1)$
 
 Luego tengo que ver que $\sum_{i=1}^{n} (2i-1) = n^2$
 
 Caso base: $n=1$
+
 $$
 \begin{cases}
 \sum_{i=1}^{1} (2i-1) = 2(1)-1 = 1 \\
@@ -61,13 +67,16 @@ n^2 = 1^2 = 1
 $$
 
 Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq 1$
+
 $$P(k): \sum_{i=1}^{k} (2i-1) = k^2$$
 
 
 Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
+
 $$P(k + 1): \sum_{i=1}^{k+1} (2i-1) = (k+1)^2$$
 
 Demostración:
+
 $$
 \begin{aligned}
 \sum_{i=1}^{k+1} (2i-1) = \frac{(k + 1)(k+2)}{2} \\
@@ -91,6 +100,7 @@ $1 + 2^2 + 3^2 + \dots + n^2 = \sum_{i=1}^{n} i^2$
 Luego tengo que ver que $\sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}$
 
 Caso base: $n=1$
+
 $$
 \begin{cases}
 \sum_{i=1}^{1} i^2 = 1^2 = 1 \\
@@ -100,12 +110,15 @@ $$
 $$
 
 Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq 1$
+
 $$P(k): \sum_{i=1}^{k} i^2 = \frac{k(k+1)(2k+1)}{6}$$
 
 Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
+
 $$P(k + 1): \sum_{i=1}^{k+1} i^2 = \frac{(k+1)(k+2)(2(k+1)+1)}{6}$$
 
 Demostración:
+
 $$
 \begin{aligned}
 \sum_{i=1}^{k+1} i^2 = \frac{(k+1)(k+2)(2(k+1)+1)}{6} \\
@@ -131,6 +144,7 @@ $-1 + 2² -3² + \dots + (-1)^n n² = \sum_{i=1}^{n} (-1)^i i²$
 Luego tengo que ver que $\sum_{i=1}^{n} (-1)^i i² = (-1)^n \frac{n(n+1)}{2}$
 
 Caso base: $n=1$
+
 $$
 \begin{cases}
 \sum_{i=1}^{1} (-1)^i i² = (-1)^1 1² = -1 \\
@@ -140,12 +154,15 @@ $$
 $$
 
 Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq 1$
+
 $$P(k): \sum_{i=1}^{k} (-1)^i i² = (-1)^k \frac{k(k+1)}{2}$$
 
 Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
+
 $$P(k + 1): \sum_{i=1}^{k+1} (-1)^i i² = (-1)^{k+1} \frac{(k+1)(k+2)}{2}$$
 
 Demostración:
+
 $$
 \begin{aligned}
 \sum_{i=1}^{k+1} (-1)^i i² = (-1)^{k+1} \frac{(k+1)(k+2)}{2} \\
@@ -172,6 +189,7 @@ $(1+2+3+\dots+n)² = \sum_{i=1}^{n} i³$
 Luego tengo que ver que $\sum_{i=1}^{n} i³ = (\frac{n(n+1)}{2})²$
 
 Caso base: $n=1$
+
 $$
 \begin{cases}
 \sum_{i=1}^{1} i³ = 1³ = 1 \\
@@ -187,6 +205,7 @@ Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
 $$P(k + 1): \sum_{i=1}^{k+1} i³ = (\frac{(k+1)(k+2)}{2})²$$
 
 Demostración:
+
 $$
 \begin{aligned}
 \sum_{i=1}^{k+1} i³ = (\frac{(k+1)(k+2)}{2})² \\
@@ -213,6 +232,7 @@ $$1\cdot1! + 2\cdot2! + 3\cdot3! + \dots + n\cdot n! = \sum_{i=1}^{n} i\cdot i!$
 Luego tengo que ver que $\sum_{i=1}^{n} i\cdot i! = (n+1)! - 1$
 
 Caso base: $n=1$
+
 $$
 \begin{cases}
 \sum_{i=1}^{1} i\cdot i! = 1\cdot1! = 1 \\
@@ -228,6 +248,7 @@ Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
 $$P(k + 1): \sum_{i=1}^{k+1} i\cdot i! = (k+2)! - 1$$
 
 Demostración:
+
 $$
 \begin{aligned}
 \sum_{i=1}^{k+1} i\cdot i! = (k+2)! - 1 \\
@@ -248,6 +269,7 @@ Encontrar una fórmula para la siguiente suma y demostrar por inducción: $1 + 2
 >Respuesta
 
 Reescribimos la proposición:
+
 $$2⁰ + 2¹ + 2² + \dots + 2^{n}= \sum_{i=0}^{n} 2^{i}$$
 
 Calculo los primeros términos:
@@ -265,6 +287,7 @@ Observo que los resultados son de la forma $2^{n+1} - 1$
 Luego tengo que ver que $\sum_{i=0}^{n} 2^{i} = 2^{n+1} - 1$
 
 Caso base: $n=0$
+
 $$
 \begin{cases}
 \sum_{i=0}^{0} 2^{i} = 2^{0} = 1 \\
@@ -274,6 +297,7 @@ $$
 $$
 
 Hipótesis inductiva: Asumimos que la proposición es cierta para algún $k \geq 0$
+
 $$P(k): \sum_{i=0}^{k} 2^{i} = 2^{k+1} - 1$$
 
 Tesis inductiva: Debemos demostrar que la proposición es cierta para $k+1$
@@ -291,3 +315,16 @@ $$
 $$
 
 >Por lo tanto, la proposición es cierta para todo $n \geq 0$.
+
+## 3. Hormigas
+La población de una colina de hormigas se duplica todos los años. Si se establece una colina inicial de 10 hormigas, ¿cuántas habrá al cabo de $n$ años?
+
+>Respuesta
+
+Como necesito que la población inicial se duplique lo que puedo hacer es tener una función de dos argumentos la cual:
+
+$P(n, h)$ donde $n$ es el número de años y $h$ es la población inicial
+
+$P(n, h) = h \cdot 2^{n}$
+
+Luego para responder la pregunta tengo que ver que $\boxed{P(n, 10) = 10 \cdot 2^{n}}$
