@@ -274,13 +274,13 @@ $$2⁰ + 2¹ + 2² + \dots + 2^{n}= \sum_{i=0}^{n} 2^{i}$$
 
 Calculo los primeros términos:
 
-$n=0: 2⁰ = 1$
+$\boxed{n=0}: 2⁰ = 1$
 
-$n=1: 2⁰ + 2¹ = 1 + 2 = 3$
+$\boxed{n=1}: 2⁰ + 2¹ = 1 + 2 = 3$
 
-$n=2: 2⁰ + 2¹ + 2² = 1 + 2 + 4 = 7$
+$\boxed{n=2}: 2⁰ + 2¹ + 2² = 1 + 2 + 4 = 7$
 
-$n=3: 2⁰ + 2¹ + 2² + 2³ = 1 + 2 + 4 + 8 = 15$
+$\boxed{n=3}: 2⁰ + 2¹ + 2² + 2³ = 1 + 2 + 4 + 8 = 15$
 
 Observo que los resultados son de la forma $2^{n+1} - 1$
 
