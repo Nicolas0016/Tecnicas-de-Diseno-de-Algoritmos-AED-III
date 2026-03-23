@@ -366,3 +366,112 @@ $$
 Como la función $f(k) = k^2 - 2k - 1$ es una parábola con concavidad positiva y su vértice está en $k = 1$, entonces para $k \geq 5$ se cumple que $k^2 - 2k - 1 > 0$
 
 >Por lo tanto, la proposición es cierta para todo $n \geq 5$.
+
+5. Gatos
+La población de gatos en un depósito tiene la propiedad de que el número de gatos en un año es igual a la suma del número de gatos de los dos años anteriores. Si en el primer año (empezando a contar desde 1) hay un solo gato, y el segundo dos, probar que el número de gatos en el año n es:
+
+$$\sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{n+1} - \left( \frac{1-\sqrt{5}}{2} \right)^{n+1} \right]$$
+
+>Respuesta
+
+Si llamo a la población de gatos en el año $n$ como $P(n)$, entonces tenemos que:
+
+$$P(n) = P(n-1) + P(n-2)$$
+
+Donde:
+$P(1) = 1$
+$P(2) = 2$
+
+Luego calculo los primeros términos:
+
+$P(3) = P(2) + P(1) = 2 + 1 = 3$
+
+$P(4) = P(3) + P(2) = 3 + 2 = 5$
+
+Entonces tengo que ver que:
+
+$$P(n) = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{n+1} - \left( \frac{1-\sqrt{5}}{2} \right)^{n+1} \right]$$
+
+Voy a usar inducción global:
+
+Caso base: $P(1)$
+
+$$P(1) = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{1+1} - \left( \frac{1-\sqrt{5}}{2} \right)^{1+1} \right] = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{2} - \left( \frac{1-\sqrt{5}}{2} \right)^{2} \right]$$
+
+$$P(1) = \sqrt{\frac{1}{5}} \left[ \frac{1+2\sqrt{5}+5}{4} - \frac{1-2\sqrt{5}+5}{4} \right] = \sqrt{\frac{1}{5}} \left[ \frac{6+2\sqrt{5}}{4} - \frac{6-2\sqrt{5}}{4} \right] = \sqrt{\frac{1}{5}} \left[ \frac{4\sqrt{5}}{4} \right] = \sqrt{\frac{1}{5}} \cdot \sqrt{5} = 1$$
+
+Luego calculo $P(2)$:
+
+$$P(2) = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{2+1} - \left( \frac{1-\sqrt{5}}{2} \right)^{2+1} \right] = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{3} - \left( \frac{1-\sqrt{5}}{2} \right)^{3} \right]$$
+
+$$P(2) = \sqrt{\frac{1}{5}} \left[ \frac{1+3\sqrt{5}+3(5)+5\sqrt{5}}{8} - \frac{1-3\sqrt{5}+3(5)-5\sqrt{5}}{8} \right] = \sqrt{\frac{1}{5}} \left[ \frac{16+8\sqrt{5}}{8} - \frac{16-8\sqrt{5}}{8} \right] = \sqrt{\frac{1}{5}} \left[ \frac{16\sqrt{5}}{8} \right] = \sqrt{\frac{1}{5}} \cdot 2\sqrt{5} = 2$$
+
+Por hipótesis inductiva asumimos que la proposición es cierta para algún $k \geq 1$
+
+Entonces tengo que ver que $P(k) = P(k-1) + P(k-2)$
+
+$$P(k) = P(k-1) + P(k-2)$$
+
+$$
+P(k) = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{k} - \left( \frac{1-\sqrt{5}}{2} \right)^{k} \right] + \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{k-1} - \left( \frac{1-\sqrt{5}}{2} \right)^{k-1} \right]$$
+
+$$
+P(k) = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{k} + \left( \frac{1+\sqrt{5}}{2} \right)^{k-1} - \left( \frac{1-\sqrt{5}}{2} \right)^{k} - \left( \frac{1-\sqrt{5}}{2} \right)^{k-1} \right]$$
+
+$$
+P(k) = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{k-1} \left( \frac{1+\sqrt{5}}{2} + 1 \right) - \left( \frac{1-\sqrt{5}}{2} \right)^{k-1} \left( \frac{1-\sqrt{5}}{2} + 1 \right) \right]$$
+
+$$
+P(k) = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{k-1} \left( \frac{3+\sqrt{5}}{2} \right) - \left( \frac{1-\sqrt{5}}{2} \right)^{k-1} \left( \frac{3-\sqrt{5}}{2} \right) \right]$$
+
+$$
+P(k) = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{k-1} \left( \frac{1+\sqrt{5}}{2} \right)^{2} - \left( \frac{1-\sqrt{5}}{2} \right)^{k-1} \left( \frac{1-\sqrt{5}}{2} \right)^{2} \right]$$
+
+$$
+P(k) = \sqrt{\frac{1}{5}} \left[ \left( \frac{1+\sqrt{5}}{2} \right)^{k+1} - \left( \frac{1-\sqrt{5}}{2} \right)^{k+1} \right]$$
+
+## 6. Programar de manera recursiva
+Programar de manera recursiva (en su lenguaje favorito) la función del punto anterior. Escribir casos de test para la función, utilizando la fórmula cerrada demostrada en el punto anterior.
+
+> Respuesta
+
+Programa
+```hs
+poblaciónGatuna :: Int -> Int
+poblaciónGatuna n
+    | n == 1 = 1
+    | n == 2 = 2
+    | n > 2 = poblaciónGatuna (n-1) + poblaciónGatuna (n-2)
+```
+Test:
+```hs
+formulaCerrada :: Int -> Int
+formulaCerrada n = floor $ sqrt (1/5) * ((1 + sqrt 5) / 2) ** (n + 1) - ((1 - sqrt 5) / 2) ** (n + 1)
+
+testCorrecto :: Bool
+testCorrecto = all (== True) [poblaciónGatuna n == formulaCerrada n | n <- [1..100]]
+```
+
+## 7. Error en la demostración
+¿Cuál es el error de la siguiente demostración?
+Se quiere probar que los elementos $x_1, x_2, \dots, x_n$ de un conjunto son todos iguales entre sí.
+
+a) Paso inicial $n = 1$: El conjunto tiene un sólo elemento $x_1$ que es igual a si mismo.
+
+b) Paso inductivo: Supongamos que $x_1 = x_2 = \dots = x_{n-1}$. Como también vale la hipótesis inductiva para un conjunto de dos elementos, tenemos que $x_{n-1} = x_n$. Por lo tanto, $x_1 = x_2 = \dots = x_n$.
+
+> Respuesta
+
+El error está en el paso inductivo. Si bien es cierto que $x_1 = x_2 = \dots = x_{n-1}$ y que $x_{n-1} = x_n$, no podemos concluir que $x_1 = x_2 = \dots = x_n$. Para que esto sea cierto, necesitaríamos que $x_1 = x_n$, lo cual no está garantizado.
+
+## 8. Error en la demostración
+¿Cuál es el error de la siguiente demostración?
+Se quiere probar que $\forall a \neq 0$  vale que $a^n = 1$
+
+a) Paso inicial (n=0): $a^0 = 1$
+
+b) Paso inductivo: Supongamos que $a^{n-1} = 1$. Entonces $a^n = \frac{a^{n-1} \dot a^{n-1}}{a^{n-2}} = \frac{1 \dot 1}{1} = 1$
+
+>Respuesta
+
+El error está en el paso inductivo. Si bien es cierto que $a^{n-1} = 1$ y que $a^n = \frac{a^{n-1} \dot a^{n-1}}{a^{n-2}}$, no podemos concluir que $a^n = 1$. Para que esto sea cierto, necesitaríamos que $a = 1$, lo cual no está garantizado.
