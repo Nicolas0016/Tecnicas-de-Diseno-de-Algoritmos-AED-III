@@ -149,6 +149,7 @@ algoritmo BT(a,k)
     fin si
     retornar
 ```
+> Podemos ver que en caso de que la nueva solución parcial no sea válida, no se explora más y se vuelve a la solución parcial anterior ignorando el resto de las soluciones parciales.
 
 > Obs: En el caso de una solución óptima, el algoritmo termina cuando encuentra la primera solución.
 
