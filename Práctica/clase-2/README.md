@@ -19,23 +19,45 @@ Dada una cadena de letras sin espacios o puntos queremos analizar si se puede su
 2. Calcular la cota superior de complejidad.
 3. Demostrar que el algoritmo es correcto. 
 
-```python
-def palabra(cadena: str) -> bool:
-    pass
+$$
+separar(S) = 
+\begin{cases} 
+{True} & \text{si } S \ \text{es vacía} \\
+\bigcup_{i=1}^{|S|} \{ \text{palabra}(S[:i]) \land separar(S[i:]) \} & \text{si } S \ \text{no es vacía} \\
+\end{cases}
+$$
 
-def es_subdivisible(texto: str, inicio: int = 0) -> bool:
-    if inicio >= len(texto): return True
-    
-    for fin in range(inicio + 1, len(texto) + 1):
-        prefijo = texto[inicio:fin]
-        if palabra(prefijo) and es_subdivisible(texto, fin):
-            return True
-    return False
-```
+2. Analisis de complejidad, en primer lugar como no sabemos cual es la complejidad de `palabra` entonces lo voy a dejar de lado por ahora.
+Asi que debería hacer es contar la cantidad de veces que se llamados de la función `separar`.
 
-Si suponemos que la función `palabra` toma tiempo constante, la cota superior de complejidad es $O(2^n)$ porque en el peor de los casos se explora todas las posibles subdivisiones de la cadena. (producto cartesiano de las posibles subdivisiones)
+$$T(n) = \sum_{n-1}^{k=0} T(k) + O(n)$$
 
-TENGOQUEPREGUNTARCOMODEMOSTRARESTO
+Donde $O(n)$ viene de llamar a `palabra(s[:i])` para todo $i \in [1, |S|]$. Vamos a usar un truco que es abrir el O con una constante $C > 0$ y comparar con la recurrencia de un valor menos.
+
+$$T(n-1) = \sum_{k=0}^{n-2}{T(k) + C(n-1)}$$
+
+Si a esto le restamos esto a la primer recurrencia obtenemos
+
+$$T(n) - T(n-1) = T(n-1) + C(n) - C(n-1)$$
+
+$$T(n) = 2T(n-1) + C$$
+
+Si expandimos esta recursión nos queda un árbol binario totalmente balanceado. Ahora queremos evaluar el costo computacional que es la suma de todos los nodos con su costo. En este caso el costo es constante así que solo necesitamos calcular la cantidad de nodos. Esto nos da la siguiente complejidad, usando la fórmula geométrica.
+
+$$\sum_{i=0}^{n} 2^i = \frac{2^{n+1} - 1}{2 - 1} = 2^{n+1} - 1 = O(2^n)$$
+
+Osea que una cota que podemos dar es:
+$$O(costo(palabra) * 2^n)$$
+3. Vamos a hacer inducción sobre la longitud de la cadena $n$. Queremos probar que $separar(S)$ computa correctamente si podemos separar $S$ en palabras o no para toda cadena $S$ de tamaño $n$.
+Hacemos inducción fuerte sobre la longitud de la cadena S. Esto significa que nuestro predicado va a valer para `todos` los elementos de tamaño más chico que el anterior. El predicado es:
+
+$P(n) = \text{Para toda cadena S de tamaño n vale que separar(S) hay una separación válida o no}$
+
+Caso base: $P(0)$ es verdadero porque la cadena vacía se puede separar en 0 palabras.
+
+Caso inductivo: Como estamos haciendo inducción fuerte / inducción global, si vale $P(n)$ para todo $n \leq j$ entonces vale $P(j+1)$. Es decir podemos asumir que vale **toda** cadena de tamaño $n \leq j$ y queremos ver entonces que pasa con una cadena $n = j + 1$ elementos. Como tenemos que j + 1 > 0, entonces si evaluamos la función recursiva caemos en el segundo caso, donde separamos S en dos cadenas de tamaño $k$ y $n - k$ para $1 \leq k \leq n$, podemos de vuelva separar en dos casos, donde S era una subcadena subdividible en el cual deberíamos porder devolver True y en caso de S no ser una cadena subdivisible:
+
+1. Si $S$ es subdivisible en particular existe un k que da el primer prefijo de la  
 
 # Ejercicio 2 - Árboles binarios de búsqueda óptimos
 
@@ -51,55 +73,6 @@ Dado un conjunto de elementos de $[n] = \{1, \cdots, n\}$ y una funcíon $f:[n] 
 
 4. Probar que el algoritmo es correcto.
 
-```python
-class ArbolBinario:
-    def __init__(self, izquierdo, valor, derecho):
-        self.izquierdo = izquierdo
-        self.valor = valor
-        self.derecho = derecho
-
-def costo_acceso(arbol: ArbolBinario | None, f: dict[int, int], nivel: int = 1) -> int:
-    if arbol is None:
-        return 0
-    return (f[arbol.valor] * nivel + 
-            costo_acceso(arbol.izquierdo, f, nivel + 1) + 
-            costo_acceso(arbol.derecho, f, nivel + 1))
-
-def generar_arboles(elementos: list[int]) -> list[ArbolBinario | None]:
-    if not elementos:
-        return [None]
-    
-    arboles = []
-    # Backtracking: probamos definir cada elemento como raíz local
-    # (Los elementos deben estar ordenados para asegurar que sea un ABB válido)
-    for i in range(len(elementos)):
-        raiz = elementos[i]
-        sub_izq = generar_arboles(elementos[:i])
-        sub_der = generar_arboles(elementos[i+1:])
-        
-        # Combinamos todos los sub-árboles izquierdos y derechos posibles
-        for izq in sub_izq:
-            for der in sub_der:
-                arboles.append(ArbolBinario(izq, raiz, der))
-                
-    return arboles
-
-def arbol_optimo(elementos: list[int], f: dict[int, int]) -> ArbolBinario | None:
-    elementos.sort()
-    todos_los_arboles = generar_arboles(elementos)
-    
-    mejor_arbol = None
-    mejor_costo = float('inf')
-    
-    for arbol in todos_los_arboles:
-        costo = costo_acceso(arbol, f, nivel=1) # El nivel de la raíz es 1
-        if costo < mejor_costo:
-            mejor_costo = costo
-            mejor_arbol = arbol
-            
-    return mejor_arbol
-```
-Cota superior: $\mathcal{O}(n \cdot C_n) \subseteq \mathcal{O}(n \cdot 4^n)$ (donde $C_n$ es la cantidad de árboles posibles).
 
 # Ejercicio 3 - Dobra 
 Dobra se encuentra con muchas palabras en su vida, como es una persona particular la mayoría de estas no le gustan (comunistas, socialistas, gays, más de dos generos, etc). Para comenzar empezó a inverntar palabras más agradables. Dobra crea palabras nuevas escribiendo una cadena de caracteres que considera buena, luego borra los caracteres que peor le caen y los remplaza con _. Luego para mejorar su vida intenta reemplazar estos guiones bajos con letras más aceptables intentando crear palabras más lindas.
@@ -119,39 +92,3 @@ Dobra considera una palabra como buena si no contiene 3 vocales consecutivas, 3 
 
 > una solución candidata es `aba` y una solución parcial es `a_b`.
 
-```py
-def es_valido(texto):
-    vocales = "aeiou"
-    
-    for i in range(len(texto) - 2):
-        # Verificar 3 vocales seguidas
-        if (texto[i] in vocales and 
-            texto[i+1] in vocales and 
-            texto[i+2] in vocales):
-            return False
-        
-        # Verificar 3 consonantes seguidas
-        if (texto[i] not in vocales and 
-            texto[i+1] not in vocales and 
-            texto[i+2] not in vocales and
-            texto[i].isalpha() and 
-            texto[i+1].isalpha() and
-            texto[i+2].isalpha()):
-            return False
-    
-    return True
-def toggle_values(texto:str, inicio = 0) -> str:
-    if not es_valido(texto): return []
-    elif inicio >= len(texto): return [texto]
-    
-    resultados = []
-    if texto[inicio] == "_":
-        
-        for letra in alfabeto:
-            nuevo_texto = texto[:inicio] + letra + texto[inicio+1:]
-            resultados.extend(toggle_values(nuevo_texto, inicio+1))
-    else: 
-        return toggle_values(texto, inicio + 1)
-    return resultados
-```
-complejidad: $O(26^k \cdot n)$ donde $k$ es la cantidad de comodines.
