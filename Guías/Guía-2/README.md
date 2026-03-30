@@ -78,13 +78,69 @@ Esto equivale a verificar si $j = 0$ antes de llegar a las hojas del árbol ($i 
 
 10. Modificar la implementación para imprimir el subconjunto $C$ que suma k, si existe.
 
+# MagiCuadrados
 
+Un cuadrado mágico de orden n, es un cuadrado con los números $\{1,\cdots, n²\}$, tal que todas sus filas, columnas y dos diagonales suman lo mismo. El número que suma cada fila es llamado número mágico.
 
+$$
+\begin{array}{|c|c|c|}
+\hline
+2 & 7 & 6 \\
+\hline
+9 & 5 & 1 \\
+\hline
+4 & 3 & 8 \\
+\hline
+\end{array}
+$$
 
+Existen muchos métodos para generar cuadrados mágicos. El objetivo de este ejercicio es contar cuántos cuadrados mágicos de orden n existen.
+ 
 
+1. ¿Cúantos cuadrados mágicos habría que generar para encontrar todos los cuadrados mágicos si se utiliza una solución de fuerza bruta?
 
+Si n = 3, entonces n² = 9. Por lo tanto, habría que generar 9! = 362,880 cuadrados mágicos. Considerando que cada cuadrado mágico tiene 9 celdas, y que cada celda puede tener un valor de 1 a 9, sin repetir valores.
 
+2. Enuciar un algoritmo que use *backtraking* para resolver este problema que se base en las siguientes ideas:
 
+    + La solución parcial tiene los valores de las primeras $i-1$ filas establecidos, a igual que los valores de las primeras $j$ columnas de la fila $i$.
+    + Para establecer el valor de la posición $(i, j + 1)$ (o $(i+1,1)$ si $j = n$ y $i \neq n$) se consideran todos los valores que aún no se encuentran en el cuadrado. Para cada valor posible, se establece dicho valor en la posición y se cuentan todos los cuadrados mágicos con esta nueva solución parcial.
+
+    mostrar los primeros dos niveles del árbol de backtraking para $n = 3$.
+
+Explicacion de la idea:
+
+El algoritmo llena las celdas del cuadrado mágico paso a paso, avanzando de izquierda a derecha y de arriba hacia abajo. Al terminar una fila, continúa por la primera celda de la fila siguiente.
+
+En cada celda vacía, realiza los siguientes pasos de exploración (*backtracking*):
+1. **Elige:** Toma el primer número disponible (que no se haya utilizado en las celdas anteriores) y lo coloca en la celda actual.
+2. **Explora:** Realiza una llamada recursiva para calcular cuántos cuadrados mágicos válidos se pueden terminar de armar a partir de este tablero parcial.
+3. **Deshace:** Una vez obtenida la respuesta de esa recursión, deshace el movimiento (saca el número de la celda).
+4. **Repite:** Prueba colocando el siguiente número disponible y vuelve a explorar.
+
+Finalmente, suma los resultados obtenidos de todas las ramas iteradas y devuelve la cantidad total de cuadrados mágicos encontrados.
+```hs
+numerosDisponibles = [1..n²]
+esUnCuadradoValido = 1 | 0 -- depende si lo es ono
+```
+$$
+\text{MagiCuadrados}(matriz, i, j, numDisponibles) = \\
+\begin{cases}
+\sum\limits_{c \in numDisponibles} MagiCuadrados(asig(matriz, i, j, c), i, j+1, numDisponibles \setminus \{c\}) & \text{si } j < n \\
+\sum\limits_{c \in numDisponibles} MagiCuadrados(asig(matriz, i, j, c), i+1, 1, numDisponibles \setminus \{c\}) & \text{si } j = n \\ 
+esUnCuadradoValido(matriz) & \text{si } numDisponibles = \emptyset
+\end{cases}
+$$
+
+3. Demostrar que el árbol de backtracking tiene O((n²)!) nodos en el peor caso.
+
+Esto se puede demostrar de menera sencilla observando la naturaleza del problema. Nuestro objetivo es ubicar $n²$ números distintos (del 1 al $n²$) en $n²$ celdas vacias, sin repetir ningún valor.
+
+Cada posible asignación completa del tablero equivale a una **permutación** única de esos $n²$ elemenots. Por principios básicos de combinatoria, la cantidad total de formulas que podemos ordenar o permutar $n²$ elementos es exactamente $(n²)!$.
+
+Dado que el árbol de *backtraking* debe generar y explorar todas estas permutaciones posibles para encontrar cuáles suman el valor mágico, su tamaño y complejidad asinótica estan directamente acotados por $O((n²)!)$.
+
+4. Considere la siguiente poda al árbol de backtraking: al momento de elegir el valor de una nueva posición, verificar que la suma parical de la fila no supere el número mágico. Verificar también que la suma parcial de las columnas no supere el número mágico. Introducir las podas al algoritmo e implementarlo en computadora. ¿Puede mejorar estas podas?
 
 
 
