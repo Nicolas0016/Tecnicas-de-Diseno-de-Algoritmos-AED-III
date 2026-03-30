@@ -57,8 +57,9 @@ Caso base: $P(0)$ es verdadero porque la cadena vacía se puede separar en 0 pal
 
 Caso inductivo: Como estamos haciendo inducción fuerte / inducción global, si vale $P(n)$ para todo $n \leq j$ entonces vale $P(j+1)$. Es decir podemos asumir que vale **toda** cadena de tamaño $n \leq j$ y queremos ver entonces que pasa con una cadena $n = j + 1$ elementos. Como tenemos que j + 1 > 0, entonces si evaluamos la función recursiva caemos en el segundo caso, donde separamos S en dos cadenas de tamaño $k$ y $n - k$ para $1 \leq k \leq n$, podemos de vuelva separar en dos casos, donde S era una subcadena subdividible en el cual deberíamos porder devolver True y en caso de S no ser una cadena subdivisible:
 
-1. Si $S$ es subdivisible en particular existe un k que da el primer prefijo de la  
+1. Si $S$ es subdivisible en particular existe un k que da el primer prefijo de la subdivisión, entonces $palabra(s[:k])$, como vale nuestra HI y $|S[k:]| < |S| = j+1$ entonces $separar(S[k:])$ devuelve `True` a la subdivisión del sufijo de S y por lo tanto tenemos un $\land$ de dos True que da True.
 
+2. El anterior fue el caso fácil, tenemos que ver si pasa si $S$ no admite una subdivisión en palabras, esto significa que dado el prefijo, o bien es invalido o el sufijo lo es. Veamos que nuestra función es correcta con respecto a esto. Dado un k, si $palabra(S[:k])$ es False listo no tenemos que hacer nada, pero si la palabra $palabra(S[:k]) = \text{True}$, tiene que ser $separar(S[k:]) = \text{False}$, porque como sabemos que estamos en un caso donde S no tiene ninguna subdivisión válida y $separar(S[k:])$ dio True y como sabemos que por HI separar funciona correctamente cadenas de tamaño $\leq j $ tiene que ser False.
 # Ejercicio 2 - Árboles binarios de búsqueda óptimos
 
 Dado un conjunto de elementos de $[n] = \{1, \cdots, n\}$ y una funcíon $f:[n] -> \mathbb{N}$ que nos da la frecuencia de acceso a dichos elementos, decimos que `A` es un arbol binario de busqueda óptimo si este minimiza el costo de todos los accesos dados por `f`.
