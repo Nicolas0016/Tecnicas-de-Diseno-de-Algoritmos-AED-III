@@ -142,8 +142,7 @@ Dado que el árbol de *backtraking* debe generar y explorar todas estas permutac
 
 4. Considere la siguiente poda al árbol de backtraking: al momento de elegir el valor de una nueva posición, verificar que la suma parical de la fila no supere el número mágico. Verificar también que la suma parcial de las columnas no supere el número mágico. Introducir las podas al algoritmo e implementarlo en computadora. ¿Puede mejorar estas podas?
 
-
-
+5. Demostrar que el número de un cuadrado mágico de orden n es siempre $\frac{n³ + n}{2}$. Adaptar la poda del algoritmo anterior del ítem anterior para que tenga en cuenta esta nueva información. Modificar la implementación y comparar los tiempos obtenidos para calcular la cantidad de cuadrados mágicos.
 
 
 
