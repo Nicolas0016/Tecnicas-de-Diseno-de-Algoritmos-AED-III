@@ -131,4 +131,13 @@ Donde ult es el índice del último edificio incluido en la subsecuencia.
 
 Si queremos que nuestra memoria sea $O(n)$ entonces nuestra cantidad de estados debe ser $O(n)$.
 
-Funcion recursiva 
+LIS(pos):
++ si memo[pos] existe lo devolvemos
++ ancho_maximo_anterior = 0
++ Para cada $j \in [0, pos-1]$:
+    + si $alto[j] < alto[pos]$:
+        + ancho_maximo_anterior = max(ancho_maximo_anterior, LIS(j))
++ memo[pos] = ancho[pos] + ancho_maximo_anterior
++ devolver memo[pos]
+
+> Con complejidad espacial de $O(n)$ la complejidad total es $O(n^2)$
