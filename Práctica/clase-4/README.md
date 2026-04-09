@@ -67,4 +67,68 @@ a=1: max(M[0][1]=-∞, M[0][0]-3=-3, M[0][2]+3=-∞) = -3
 | 1 | 0   | -3   | -∞  | -∞  | -∞  |
 
 
- 
+d = 2 (p[1] = 2 )
+prev =  1, curr = 0 (reciclamos la fila 0)
+
+
+| d | a=0 | a=1 | a=2 | a=3 | a=4 |
+|---|-----|-----|-----|-----|-----|
+| 2 | 0   | -2  | -5  | -∞  | -∞  |
+| 1 | 0   | -3   | -∞  | -∞  | -∞  |
+
+
+d = 3 (p[2] = 5)
+prev = 0, curr = 1 (reciclamos la fila 1)
+
+| d | a=0 | a=1 | a=2 | a=3 | a=4 |
+|---|-----|-----|-----|-----|-----|
+| 3 | 3   | 0   | -5   | -10   | -∞  |
+| 2 | 0   | -2  | -5  | -∞  | -∞  |
+
+
+d = 4 (p[3] = 6)
+prev = 1, curr = 0 (reciclamos la fila 0)
+
+| d | a=0 | a=1 | a=2 | a=3 | a=4 |
+|---|-----|-----|-----|-----|-----|
+| 4 | 6   | 1   | -4   | -10   | -∞  |
+| 3 | 3   | 0   | -5   | -10   | -∞  |
+
+Resultado final:
+M[n mod 2][0] = M[0][0] = 6
+
+¿Cómo se ve la matriz en memoria?
+Solo guardamos 2 filas. Al final el algoritmo:
+| Fila | a=0 | a=1 | a=2 | a=3 | a=4 |
+|------|-----|-----|-----|-----|-----|
+| Fila 0 (curr)    | 6   | 1   | -4  | -10 | -∞  |
+| Fila 1 (prev)    | 3   | 0   | -5  | -10 | -∞  |
+
+
+# Mi Buenos Aires Crecido
+Sasha vive en San Nicolás hace mucho tiempo, y tiene una eterna discusión con su vecina Tasha. Sasha dice que si se mira el horizonte de izquierda a derecha terminando en el obelisco, los edificios están ordenados en un perfil principalmente ascendente para que la altura del obelisco sea más impresionante. Tasha le dice que con las nuevas torres que se construyeron en la zona eso ya no es verdad, y que en realidad ahora menos de la mitad del ancho del horizonte está en orden ascendente.
+
+
+Entrada: Recibimos una lista de edificios ordenados de izquierda a derecha con dos datos para cada uno, el ancho de cada edificio y por otro lado el alto
+
+Buscamos la longitud de la máxima subsecuencia ascendente, es decir, la subsecuencia creciente que ocupe el mayor espacio horizontal.
+
+Una posible respuesta 
+
+Sea alto(-1) = 0
+
+$$
+f(i, ult) = 
+\begin{cases}
+    0 & \text{si } i \geq n  \\
+    f(i+1, ult) & \text{si } alto[i] \leq alto[ult] \\
+    max(f(i+1, ult), ancho[i] + f(i+1, i)) & \text{En cualquier otro caso}
+\end{cases}
+$$
+Donde ult es el índice del último edificio incluido en la subsecuencia. 
+
+> Hay una versión con la misma complejidad temporal pero con complejidad espacial $O(n)$ ¿Como podriamos adaptar nuestra nueva solución?
+
+Si queremos que nuestra memoria sea $O(n)$ entonces nuestra cantidad de estados debe ser $O(n)$.
+
+Funcion recursiva 
